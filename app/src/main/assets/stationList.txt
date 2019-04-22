@@ -1,0 +1,225 @@
+Station Name->hasToilet->hasParking
+ADARSH NAGAR->false->false
+AIIMS->false->false
+AKSHARDHAM->false->false
+ANAND VIHAR->false->false
+ARJANGARH->false->false
+ARTHALA->false->false
+ASHOK PARK MAIN->false->false
+ASHRAM->false->false
+AZADPUR->false->false
+BADARPUR->false->false
+BADKAL MOR->false->false
+BAHADURGARH CITY->false->false
+BARAKHAMBA ROAD->false->false
+BATA CHOWK->false->false
+BHIKAJI CAMA PLACE->false->false
+BOTANICAL GARDEN->false->false
+BRIG. HOSHIAR SINGH->false->false
+CENTRAL SECRETARIAT->false->false
+CHANDNI CHOWK->false->false
+CHAWRI BAZAR->false->false
+CHHATTARPUR->false->false
+CHIRAG DELHI->false->false
+CIVIL LINES->false->false
+DABRI MOR JANAKPURI SOUTH->false->false
+DASHRATHPURI->false->false
+DELHI CANTT->false->false
+DELHI GATE->false->false
+DILLI HAAT - INA->false->false
+DILSHAD GARDEN->false->false
+DURGABAI DESHMUKH SOUTH CAMPUS->false->false
+DWARKA->false->false
+DWARKA MOR->false->false
+DWARKA SEC 10->false->false
+DWARKA SEC 11->false->false
+DWARKA SEC 12->false->false
+DWARKA SEC 13->false->false
+DWARKA SEC 14->false->false
+DWARKA SEC 21->false->false
+DWARKA SEC 8->false->false
+DWARKA SEC 9->false->false
+EAST AZAD NAGAR->false->false
+EAST VINOD NAGAR - MAYUR VIHAR-II->false->false
+ESCORTS MUJESAR->false->false
+ESI BASAIDARAPUR->false->false
+G.T.B. NAGAR->false->false
+GHEVRA->false->false
+GHITORNI->false->false
+GOKULPURI->false->false
+GOLF COURSE->false->false
+GOVIND PURI->false->false
+GREATER KAILASH->false->false
+GREEN PARK->false->false
+GURU DRONACHARYA->false->false
+HAIDERPUR BADLI MOR->false->false
+HARKESH NAGAR OKHLA->false->false
+HAUZ KHAS->false->false
+HINDON RIVER->false->false
+HUDA CITY CENTRE->false->false
+I P EXTENSION->false->false
+I.I.T->false->false
+IFFCO CHOWK->false->false
+IGD AIRPORT->false->false
+INDER LOK->false->false
+INDRAPRASTHA->false->false
+ITO->false->false
+JAFFRABAD->false->false
+JAHANGIRPURI->false->false
+JAMA MASJID->false->false
+JAMIA MILLIA ISLAMIA->false->false
+JANAKPURI EAST->false->false
+JANAKPURI WEST->false->false
+JANGPURA->false->false
+JANPATH->false->false
+JASOLA APOLLO->false->false
+JASOLA VIHAR->false->false
+ SHAHEEN BAGH->false->false
+JHANDEWALAN->false->false
+JHILMIL->false->false
+JLN STADIUM->false->false
+JOHRI ENCLAVE->false->false
+JORBAGH->false->false
+KAILASH COLONY->false->false
+KALINDI KUNJ->false->false
+KALKAJI MANDIR->false->false
+KANHAIYA NAGAR->false->false
+KARKAR DUMA->false->false
+KARKARDUMA COURT->false->false
+KAROL BAGH->false->false
+KASHMERE GATE->false->false
+KAUSHAMBI->false->false
+KESHAV PURAM->false->false
+KHAN MARKET->false->false
+KIRTI NAGAR->false->false
+KOHAT ENCLAVE->false->false
+KRISHNA NAGAR->false->false
+LAJPAT NAGAR->false->false
+LAL QUILA->false->false
+LAXMI NAGAR->false->false
+LOK KALYAN MARG->false->false
+M G ROAD->false->false
+MADI PUR->false->false
+MAJLIS PARK->false->false
+MAJOR MOHIT SHARMA RAJENDRA NAGAR->false->false
+MALVIYA NAGAR->false->false
+MANDAWALI - WEST VINOD NAGAR->false->false
+MANDI HOUSE->false->false
+MANSAROVAR PARK->false->false
+MAUJPUR - BABARPUR->false->false
+MAYAPURI->false->false
+MAYUR VIHAR PKT-1->false->false
+MAYUR VIHAR-I->false->false
+MAYUR VIHAR-I EXT->false->false
+MEWALA MAHARAJPUR->false->false
+MODEL TOWN->false->false
+MOHAN ESTATE->false->false
+MOHAN NAGAR->false->false
+MOOLCHAND->false->false
+MOTI NAGAR->false->false
+MUNDKA->false->false
+MUNDKA INDUSTRIAL AREA->false->false
+MUNIRKA->false->false
+NANGLOI->false->false
+NANGLOI RLY. STATION->false->false
+NARAINA VIHAR->false->false
+NAWADA->false->false
+NEELAM CHOWK AJRONDA->false->false
+NEHRU ENCLAVE->false->false
+NEHRU PLACE->false->false
+NETAJI SUBHASH PLACE->false->false
+NEW ASHOK NAGAR->false->false
+NEW DELHI->false->false
+NHPC CHOWK->false->false
+NIRMAN VIHAR->false->false
+NOIDA CITY CENTRE->false->false
+NOIDA ELECTRONIC CITY->false->false
+NOIDA SEC 15->false->false
+NOIDA SEC 16->false->false
+NOIDA SEC 18->false->false
+NSIC OKHLA->false->false
+OKHLA BIRD SANCTUARY->false->false
+OKHLA VIHAR->false->false
+OLD FARIDABAD->false->false
+PALAM->false->false
+PANCHSHEEL PARK->false->false
+PANDIT SHREE RAM SHARMA->false->false
+PASCHIM VIHAR (EAST)->false->false
+PASCHIM VIHAR (WEST)->false->false
+PATEL CHOWK->false->false
+PATEL NAGAR->false->false
+PEERA GARHI->false->false
+PITAM PURA->false->false
+PRAGATI MAIDAN->false->false
+PRATAP NAGAR->false->false
+PREET VIHAR->false->false
+PUL BANGASH->false->false
+PUNJABI BAGH->false->false
+PUNJABI BAGH WEST->false->false
+QUTAB MINAR->false->false
+R.K.PURAM->false->false
+RAJ BAGH->false->false
+RAJA NAHAR SINGH - BALLABHGARH->false->false
+RAJDHANI PARK->false->false
+RAJENDRA PLACE->false->false
+RAJIV CHOWK->false->false
+RAJOURI GARDEN->false->false
+RAMESH NAGAR->false->false
+RITHALA->false->false
+RK ASHRAM MARG->false->false
+ROHINI EAST->false->false
+ROHINI SECTOR 18,19->false->false
+ROHINI WEST->false->false
+SADAR BAZAR->false->false
+SAKET->false->false
+SAMAYPUR BADLI->false->false
+SANT SURDAS->false->false
+SARAI->false->false
+SARAI KALE KHAN - NIZAMUDDIN->false->false
+SARITA VIHAR->false->false
+SAROJINI NAGAR->false->false
+SATGURU RAM SINGH MARG->false->false
+SECTOR - 34 NOIDA->false->false
+SECTOR - 52 NOIDA->false->false
+SECTOR - 59 NOIDA->false->false
+SECTOR - 61 NOIDA->false->false
+SECTOR - 62 NOIDA->false->false
+SECTOR-28->false->false
+SEELAMPUR->false->false
+SHADIPUR->false->false
+SHAHDARA->false->false
+SHAHEED STHAL - NEW BUS ADDA->false->false
+SHAHID NAGAR->false->false
+SHAKURPUR->false->false
+SHALIMAR BAGH->false->false
+SHANKAR VIHAR->false->false
+SHASTRI NAGAR->false->false
+SHASTRI PARK->false->false
+SHIV VIHAR->false->false
+SHIVAJI PARK->false->false
+SHYAM PARK->false->false
+SIKANDARPUR->false->false
+SIR VISHWESHWARAIAH MOTI BAGH->false->false
+SOUTH EXTENSION->false->false
+SUBHASH NAGAR->false->false
+SUKHDEV VIHAR->false->false
+SULTANPUR->false->false
+SURAJMAL STADIUM->false->false
+TAGORE GARDEN->false->false
+TIKRI BORDER->false->false
+TIKRI KALAN->false->false
+TILAK NAGAR->false->false
+TIS HAZARI->false->false
+TRILOKPURI - SANJAY LAKE->false->false
+TUGHLAKABAD->false->false
+UDYOG BHAWAN->false->false
+UDYOG NAGAR->false->false
+UTTAM NAGAR EAST->false->false
+UTTAM NAGAR WEST->false->false
+VAISHALI->false->false
+VASANT VIHAR->false->false
+VIDHAN SABHA->false->false
+VINOBAPURI->false->false
+VISHWAVIDYALAYA->false->false
+WELCOME->false->false
+YAMUNA BANK->false->false

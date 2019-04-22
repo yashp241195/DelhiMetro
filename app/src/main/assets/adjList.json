@@ -1,0 +1,19 @@
+{
+ "adjList" : [
+    {
+      "timeInterval": " 2 min",
+      "line": "blue",
+      "stationList": ["VAISHALI","KAUSHAMBI"]
+
+    },
+   {
+     "timeInterval": "2 min ",
+     "line": "red",
+     "stationList": ["DILSHAD GARDEN","JHILMIL"]
+
+   }
+
+
+ ]
+
+}
