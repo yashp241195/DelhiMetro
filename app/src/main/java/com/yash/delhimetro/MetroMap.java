@@ -1,11 +1,12 @@
 package com.yash.delhimetro;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.github.chrisbanes.photoview.PhotoView;
-import com.github.chrisbanes.photoview.PhotoViewAttacher;
 
 public class MetroMap extends AppCompatActivity {
 
@@ -15,6 +16,10 @@ public class MetroMap extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_metro_map);
 
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+
+
         PhotoView photoView = (PhotoView) findViewById(R.id.metro_map);
         photoView.setImageResource(R.mipmap.dmrc);
 
@@ -23,4 +28,18 @@ public class MetroMap extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+
 }

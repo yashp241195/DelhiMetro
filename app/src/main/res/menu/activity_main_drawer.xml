@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view"
 
-    <group android:checkableBehavior="single">
+    >
+
+    <group
+        android:id="@+id/nav_view"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/allStation"
+            android:id="@+id/nav_allStation"
             android:icon="@drawable/ic_directions_transit_black_24dp"
             android:title="All Stations" />
+
         <item
-            android:id="@+id/allPlace"
+            android:id="@+id/nav_allPlace"
             android:icon="@drawable/india_gate"
             android:title="All Places" />
+
         <item
-            android:id="@+id/map"
+            android:id="@+id/nav_map"
             android:icon="@drawable/ic_map_black_24dp"
             android:title="Metro map" />
+
         <item
-            android:id="@+id/webQ"
+            android:id="@+id/nav_webQ"
             android:icon="@drawable/ic_public_black_24dp"
             android:title="Official website" />
     </group>

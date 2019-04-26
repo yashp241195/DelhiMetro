@@ -6,4 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".Explore">
 
+    <TextView
+        android:id="@+id/actE_labelFromStation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="From Station"
+        app:layout_constraintEnd_toStartOf="@+id/actE_valFromStation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/actE_valFromStation"
+        android:layout_width="237dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="38dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/actE_labelToStation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        android:text="To Station"
+        app:layout_constraintEnd_toStartOf="@+id/actE_valToStation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actE_labelFromStation" />
+
+    <TextView
+        android:id="@+id/actE_valToStation"
+        android:layout_width="238dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="37dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actE_valFromStation" />
+
+    <TextView
+        android:id="@+id/actE_labelToPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:text="To Place"
+        app:layout_constraintEnd_toStartOf="@+id/actE_valToPlace"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actE_labelToStation" />
+
+    <TextView
+        android:id="@+id/actE_valToPlace"
+        android:layout_width="237dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="38dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actE_valToStation" />
 </android.support.constraint.ConstraintLayout>

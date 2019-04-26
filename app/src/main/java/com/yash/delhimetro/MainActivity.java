@@ -414,17 +414,17 @@ public class MainActivity extends AppCompatActivity
 
         Class nextActivity = null;
 
-        if (id == R.id.map) {
+        if (id == R.id.nav_map) {
             nextActivity = MetroMap.class;
 
-        } else if (id == R.id.webQ) {
+        } else if (id == R.id.nav_webQ) {
             nextActivity = WebViewExplorePlace.class;
 
-        } else if (id == R.id.allStation) {
+        } else if (id == R.id.nav_allStation) {
             nextActivity = AllStations.class;
 
 
-        } else if (id == R.id.allPlace) {
+        } else if (id == R.id.nav_allPlace) {
             nextActivity = AllPlaces.class;
 
         } else if (id == R.id.nav_share) {
