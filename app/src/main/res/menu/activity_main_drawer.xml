@@ -5,21 +5,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/allStation"
+            android:icon="@drawable/ic_directions_transit_black_24dp"
+            android:title="All Stations" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/allPlace"
+            android:icon="@drawable/india_gate"
+            android:title="All Places" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/map"
+            android:icon="@drawable/ic_map_black_24dp"
+            android:title="Metro map" />
         <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
+            android:id="@+id/webQ"
+            android:icon="@drawable/ic_public_black_24dp"
+            android:title="Official website" />
     </group>
 
     <item android:title="Communicate">

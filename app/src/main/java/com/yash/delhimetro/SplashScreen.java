@@ -34,6 +34,7 @@ public class SplashScreen extends AppCompatActivity {
     private JSONObject AdjListJson;
 
     private static final String TAG = "Splash Screen";
+    private static final String MANUAL_TEST = "MANUAL TEST";
     private static final String MY_PREFS_NAME = "Loaded Data";
     private static final int SLEEP_TIME = 2000;
 
@@ -147,18 +148,8 @@ public class SplashScreen extends AppCompatActivity {
     // Test the correctness of loaded data manually
 
     private void ManualTest(long time){
-
-        String From = "VAISHALI";
-        String To = "KAUSHAMBI";
-        String query = getFareQuery(From,To);
-        Integer fare = hashMapFare.get(query);
-        String result = From+" -> "+To+" "+fare.toString()
-                +"\tLoad Time : "+time+"\n";
-        result = result.concat(stationDetailsArrayList.get(nameToIndexStation.get(From)).toString()+"\n");
-        result = result.concat(placeDetailsArrayList.get(0).toString()+"\n");
-        result = result.concat(neighbourListArrayList.get(0).toString()+"\n");
-
-        Log.d(TAG,result);
+        String result = "\tLoad Time : "+time+"\n";
+        Log.d(MANUAL_TEST,result);
     }
 
     // Load data on different thread to reduce the load on UI or main Thread

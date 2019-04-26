@@ -9,10 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AllPlaces"></activity>
+        <activity android:name=".AllStations" />
+        <activity
+            android:name=".ExploreRoutes"
+            android:label="@string/title_activity_explore_routes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MetroMap" />
+        <activity android:name=".WebViewExplorePlace" />
+        <activity android:name=".Explore" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
