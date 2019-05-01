@@ -4,251 +4,323 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WebViewExplorePlace">
+    tools:context=".WebViewExplorePlace"
+    android:background="@drawable/gray_shade"
 
-    <TextView
-        android:id="@+id/actW_placeNameLabel"
-        android:layout_width="87dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="20dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/actW_placeTypeLabel"
-        app:layout_constraintEnd_toStartOf="@+id/actW_placeNameTv"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Place Name" />
+    >
 
-    <TextView
-        android:id="@+id/actW_placeNameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="216dp"
-        android:layout_marginBottom="20dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/actW_placeNearbyMetroLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/actW_placeTypeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="48dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/actW_placeNearbyMetroLabel"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actW_placeNameLabel"
-        tools:text="Place Type" />
-
-    <TextView
-        android:id="@+id/actW_placeNearbyMetroLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="141dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actW_placeNameTv"
-        tools:text="Nearby Metro Station" />
-
-    <TextView
-        android:id="@+id/actW_placeTypeTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="59dp"
-        android:layout_marginBottom="43dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/actW_webView"
-        app:layout_constraintEnd_toStartOf="@+id/actW_placeNearbyMetroTv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actW_placeTypeLabel" />
-
-    <TextView
-        android:id="@+id/actW_placeNearbyMetroTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="216dp"
-        android:layout_marginBottom="43dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/actW_webView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actW_placeNearbyMetroLabel"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <WebView
-        android:id="@+id/actW_webView"
-        android:layout_width="410dp"
-        android:layout_height="354dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="1dp"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayoutHeading"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#fff"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actW_placeTypeTv">
+        app:layout_constraintTop_toTopOf="parent">
 
-    </WebView>
+        <TextView
+            android:id="@+id/actW_placeNameLabel"
+            android:layout_width="87dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="serif"
+            android:text="Place Name"
+            android:textColor="#130101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/actW_placeNameTv"
+            android:layout_width="0dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="serif"
+            android:text="TextView"
+            android:textColor="#0121CD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/actW_placeNameLabel"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/actW_placeTypeLabel"
+            android:layout_width="89dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="7dp"
+            android:fontFamily="serif"
+            android:text="Place Type"
+            android:textColor="#0C0000"
+            app:layout_constraintBottom_toTopOf="@+id/actW_placeNearbyMetroLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actW_placeNameLabel" />
+
+        <TextView
+            android:id="@+id/actW_placeNearbyMetroLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="serif"
+            android:text="Nearby Metro Station"
+            android:textColor="#140000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/actW_placeTypeTv"
+            android:layout_width="0dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="serif"
+            android:text="TextView"
+            android:textColor="#FF0121CD"
+            app:layout_constraintBottom_toTopOf="@+id/actW_placeNearbyMetroTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.196"
+            app:layout_constraintStart_toEndOf="@+id/actW_placeTypeLabel"
+            app:layout_constraintTop_toBottomOf="@+id/actW_placeNameTv" />
+
+        <TextView
+            android:id="@+id/actW_placeNearbyMetroTv"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="serif"
+            android:text="TextView"
+            android:textColor="#FF0121CD"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/actW_placeNearbyMetroLabel" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutHeading">
+
+        <WebView
+            android:id="@+id/actW_webView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </WebView>
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout3"
-        android:layout_width="412dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="12dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBtnGroup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actW_webView"
-        app:layout_constraintVertical_bias="0.933">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button13"
-            android:layout_width="84dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="20dp"
-            android:text="Button"
+            android:id="@+id/buttonBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded"
+            android:drawableStart="@drawable/ic_arrow_back_black_24dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="@dimen/font_size"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button12"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="18dp"
-            android:text="Button"
+            android:id="@+id/buttonRefresh"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded"
+            android:drawableEnd="@drawable/ic_refresh_black_24dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textSize="@dimen/font_size"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button14"
+            app:layout_constraintStart_toEndOf="@+id/buttonBack"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/buttonForward"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded"
+            android:drawableEnd="@drawable/ic_arrow_forward_black_24dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text=" "
+            android:textSize="@dimen/font_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/buttonRefresh"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="17dp"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button15"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/button15"
-            android:layout_width="88dp"
-            android:layout_height="49dp"
-            android:layout_marginEnd="7dp"
-            android:text="Button"
+            android:id="@+id/buttonFull"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#ffffff"
+            android:drawableEnd="@drawable/ic_unfold_more_black_24dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="Full Screen"
+            android:textSize="@dimen/font_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="431dp"
+        android:id="@+id/constraintLayoutBtnGroup"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/button9"
-            app:layout_constraintEnd_toStartOf="@+id/button10"
+            android:id="@+id/buttonNearbyMetro"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="102dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:drawableEnd="@drawable/ic_directions_transit_black_24dp"
+            android:text="metro"
+            android:textSize="@dimen/font_size"
+            app:layout_constraintBottom_toTopOf="@+id/buttonATM"
+            app:layout_constraintEnd_toStartOf="@+id/buttonPetrol"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="18dp"
-            android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/button8"
-            app:layout_constraintEnd_toStartOf="@+id/button6"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginEnd="18dp"
-            android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/button7"
-            app:layout_constraintEnd_toStartOf="@+id/button4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginEnd="18dp"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button5" />
-
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="18dp"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button9"
-            app:layout_constraintTop_toBottomOf="@+id/button4" />
-
-        <Button
-            android:id="@+id/button9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button11"
-            app:layout_constraintTop_toBottomOf="@+id/button6" />
-
-        <Button
-            android:id="@+id/button10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="1dp"
-            android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/button11"
+            android:id="@+id/buttonPetrol"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="107dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:drawableEnd="@drawable/ic_ev_station_black_24dp"
+            android:text="Petrol"
+            android:textSize="@dimen/font_size"
+            app:layout_constraintBottom_toTopOf="@+id/buttonYoutube"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/buttonTimings"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="107dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:drawableEnd="@drawable/ic_access_time_black_24dp"
+            android:text="Timings "
+            android:textSize="@dimen/font_size"
+            app:layout_constraintBottom_toTopOf="@+id/buttonImages"
+            app:layout_constraintEnd_toStartOf="@+id/buttonNearbyMetro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buttonImages"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="103dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="6dp"
+            android:drawableEnd="@drawable/ic_image_black_24dp"
+            android:text="Images "
+            android:textSize="@dimen/font_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonATM"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonATM"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="18dp"
-            android:text="Button"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="5dp"
+            android:drawableEnd="@drawable/ic_local_atm_black_24dp"
+            android:text="ATM"
+            android:textSize="@dimen/font_size"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button10" />
+            app:layout_constraintEnd_toStartOf="@+id/buttonYoutube" />
+
+        <Button
+            android:id="@+id/buttonYoutube"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:drawableEnd="@drawable/ic_youtube_black_24dp"
+            android:text="Youtube"
+            android:textSize="@dimen/font_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,9 +1,8 @@
 package com.yash.delhimetro;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<StationDetails> stationDetailsArrayList;
     private ArrayList<PlaceDetails> placeDetailsArrayList;
     private HashMap<String,Integer> nameToIndexStation;
+    private HashMap<String,String> placeNearbyMetro = new HashMap<>();
 
     private ArrayList<String> stationNameArrayList = new ArrayList<>();
     private ArrayList<String> placeNameArrayList = new ArrayList<>();
@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this,MetroMap.class);
+                startActivity(intent);
             }
         });
 
@@ -82,9 +82,7 @@ public class MainActivity extends AppCompatActivity
 
 
         LoadData();
-
         LoadWidgets();
-
         OnSubmitSearchRoute();
 
 
@@ -160,28 +158,19 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        acTvFrom.setOnTouchListener(new View.OnTouchListener() {
+        acTvFrom.setOnTouchListener(clear_acTvText("FromClear"));
+        acTvTo.setOnTouchListener(clear_acTvText("ToClear"));
+
+    }
+
+    // inner class to invoke the clear Text when clicked drawable right
+
+    private View.OnTouchListener clear_acTvText(final String opt){
+        return new View.OnTouchListener() {
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
 
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (acTvFrom.getRight() - acTvFrom.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        // your action here
-                        acTvFrom.setText("");
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-
-        acTvTo.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_LEFT = 0;
                 final int DRAWABLE_TOP = 1;
                 final int DRAWABLE_RIGHT = 2;
@@ -190,15 +179,21 @@ public class MainActivity extends AppCompatActivity
                 if(event.getAction() == MotionEvent.ACTION_UP) {
                     if(event.getRawX() >= (acTvTo.getRight() - acTvTo.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         // your action here
-                        acTvTo.setText("");
+
+                        if(opt.equals("FromClear"))
+                        {
+                            acTvFrom.setText("");
+                        }
+                        else {
+                            acTvTo.setText("");
+                        }
+
                         return true;
                     }
                 }
                 return false;
             }
-        });
-
-
+        };
     }
 
     // next activity config
@@ -214,6 +209,10 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra("FromStation",From);
         intent.putExtra("opt_id",optId);
         intent.putExtra("To",To);
+
+        if(optId == R.id.optToPlace) {
+            intent.putExtra("placeNearbyMetro", placeNearbyMetro.get(To));
+        }
 
         startActivity(intent);
     }
@@ -337,6 +336,10 @@ public class MainActivity extends AppCompatActivity
         }
 
         for (PlaceDetails placeDetails: placeDetailsArrayList){
+
+            placeNearbyMetro.put(placeDetails.getPlaceName(),
+                    placeDetails.getNearbyMetroStation());
+
             placeNameArrayList.add(placeDetails.getPlaceName());
         }
 
@@ -384,6 +387,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -418,7 +422,7 @@ public class MainActivity extends AppCompatActivity
             nextActivity = MetroMap.class;
 
         } else if (id == R.id.nav_webQ) {
-            nextActivity = WebViewExplorePlace.class;
+            nextActivity = WebQuery.class;
 
         } else if (id == R.id.nav_allStation) {
             nextActivity = AllStations.class;
@@ -427,16 +431,44 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_allPlace) {
             nextActivity = AllPlaces.class;
 
+        } else if (id == R.id.nav_recharge) {
+
+            try {
+
+                Uri uri = Uri.parse("https://paytm.com/metro-card-recharge"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+
+
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+            try {
+
+                String appName = getResources().getString(R.string.app_name);
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, appName);
+
+                String shareMessage= "\nDownload "+appName+" application \n\n";
+                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                startActivity(Intent.createChooser(shareIntent, "choose one"));
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
 
         }
 
-        Intent intent = new Intent(this,nextActivity);
 
         if(nextActivity!=null)
-            startActivity(intent);
+            startActivity(new Intent(this,nextActivity));
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -216,7 +216,7 @@ UDYOG BHAWAN->false->false
 UDYOG NAGAR->false->false
 UTTAM NAGAR EAST->false->false
 UTTAM NAGAR WEST->false->false
-VAISHALI->false->false
+VAISHALI->true->true
 VASANT VIHAR->false->false
 VIDHAN SABHA->false->false
 VINOBAPURI->false->false

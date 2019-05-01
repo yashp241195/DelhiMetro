@@ -143,6 +143,7 @@ public class SplashScreen extends AppCompatActivity {
     private void GoToNextActivity(){
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     // Test the correctness of loaded data manually
@@ -447,6 +448,8 @@ public class SplashScreen extends AppCompatActivity {
         }
 
     }
+
+
 
 
 }

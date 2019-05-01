@@ -13,6 +13,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.sql.Time;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -34,11 +36,12 @@ public class MainActivityTest {
         Intents.init();
     }
 
-
+/*
     @Test
     public void TestInputs(){
         TestInputForm();
     }
+*/
 
     @Test
     public void TestNavigationView(){
@@ -53,10 +56,27 @@ public class MainActivityTest {
         int checkWebQ = R.id.nav_webQ;
 
         // Test the working of checkMap
-        TestNavigation(checkMap);
-
+         TestNavigation(checkAllPlace);
 
     }
+
+    @Test
+    public void TestNavigationView2(){
+
+        // don't run multiple TestNavigation here
+        // because of intent
+        // init and release ..
+
+        int checkMap = R.id.nav_map;
+        int checkAllStations = R.id.nav_allStation;
+        int checkAllPlace = R.id.nav_allPlace;
+        int checkWebQ = R.id.nav_webQ;
+
+        // Test the working of checkMap
+        TestNavigation(checkAllStations);
+
+    }
+
 
 
     @After
@@ -70,27 +90,25 @@ public class MainActivityTest {
 
 
     private void TestInputForm(){
+
         String From = "VAISHALI";
         String To = "RAJIV CHOWK";
 
         onView(withId(R.id.optToStation)).perform(click());
         TestInputsUtil(From,To,"station");
 
-        Espresso.pressBack();
 
         To = "PACIFIC MALL";
         onView(withId(R.id.optToPlace)).perform(click());
         TestInputsUtil(From,To,"place");
 
-        Espresso.pressBack();
 
     }
 
 
     private void TestInputsUtil(String From, String To,String opt){
 
-        // clear From Station Text by clicking on clear text
-
+        // clear input in acTvFrom
         onView(withId(R.id.actM_actvFrom)).perform(
                 new ClickDrawableAction(ClickDrawableAction.Right));
 
@@ -112,10 +130,19 @@ public class MainActivityTest {
         int ToId = (opt.equals("station"))?R.id.actE_valToStation:R.id.actE_valToPlace;
         onView(withId(ToId)).check(matches(withText(To)));
 
+        Espresso.pressBack();
+
+
     }
 
 
     private void TestNavigation(int id){
+
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+
+        // Open Drawer to click on navigation.
+        onView(withId(R.id.drawer_layout))
+                .perform(DrawerActions.open()); // Open Drawer
 
         switch (id){
             case R.id.nav_map:
@@ -139,11 +166,6 @@ public class MainActivityTest {
 
 
     private void TestMap(int viewId){
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-
-        // Open Drawer to click on navigation.
-        onView(withId(R.id.drawer_layout))
-                .perform(DrawerActions.open()); // Open Drawer
 
 
         // Start the screen of your activity.
@@ -156,12 +178,6 @@ public class MainActivityTest {
 
     private void TestAllStation(int viewId){
 
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-
-        // Open Drawer to click on navigation.
-        onView(withId(R.id.drawer_layout))
-                .perform(DrawerActions.open()); // Open Drawer
-
 
         // Start the screen of your activity.
         onView(withId(R.id.nav_view))
@@ -172,12 +188,6 @@ public class MainActivityTest {
     }
 
     private void TestAllPlaces(int viewId){
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-
-        // Open Drawer to click on navigation.
-        onView(withId(R.id.drawer_layout))
-                .perform(DrawerActions.open()); // Open Drawer
-
 
         // Start the screen of your activity.
         onView(withId(R.id.nav_view))
@@ -188,11 +198,6 @@ public class MainActivityTest {
     }
 
     private void TestWebQ(int viewId){
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-
-        // Open Drawer to click on navigation.
-        onView(withId(R.id.drawer_layout))
-                .perform(DrawerActions.open()); // Open Drawer
 
         // Start the screen of your activity.
         onView(withId(R.id.nav_view))
@@ -201,6 +206,8 @@ public class MainActivityTest {
         intended(hasComponent(WebViewExplorePlace.class.getName()));
 
     }
+
+
 
 
 }

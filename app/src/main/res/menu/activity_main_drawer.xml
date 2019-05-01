@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view"
 
     >
 
     <group
         android:id="@+id/nav_view"
-        android:checkableBehavior="single">
+        android:checkableBehavior="single"
+        >
         <item
             android:id="@+id/nav_allStation"
             android:icon="@drawable/ic_directions_transit_black_24dp"
@@ -17,6 +19,7 @@
             android:id="@+id/nav_allPlace"
             android:icon="@drawable/india_gate"
             android:title="All Places" />
+
 
         <item
             android:id="@+id/nav_map"
@@ -36,9 +39,9 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/menu_share" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
+                android:id="@+id/nav_recharge"
+                android:icon="@drawable/ic_rupee"
+                android:title="@string/menu_recharge" />
         </menu>
     </item>
 
