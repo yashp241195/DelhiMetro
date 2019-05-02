@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main"
-    android:background="@drawable/gray_shade"
+    android:background="@drawable/gradient_gray_shade"
 
     >
 
@@ -121,7 +121,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="220dp"
-        android:background="@drawable/red_shade"
+        android:background="@drawable/gradient_red_shade"
         android:text="Search Route"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,10 +1,15 @@
 package com.yash.delhimetro.ViewAdapters;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +19,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.yash.delhimetro.DataProviders.StationDetails;
 import com.yash.delhimetro.R;
 
@@ -28,10 +34,13 @@ public class StationListAdapter extends
     private ArrayList<StationDetails> stationDetailsListFull,
             stationDetailsListFiltered;
 
+    private Context context;
 
-    public StationListAdapter(ArrayList<StationDetails> stationList) {
+    public StationListAdapter(Context context, ArrayList<StationDetails> stationList) {
+
         this.stationDetailsListFull = stationList;
         this.stationDetailsListFiltered = stationList;
+        this.context = context;
 
 
     }
@@ -61,34 +70,31 @@ public class StationListAdapter extends
 
         StationDetails stationDetails = stationDetailsListFiltered.get(i);
 
-
             String name = stationDetails.getStationName();
             Boolean hasNearbyMall = stationDetails.getHasNearbyMall();
             Boolean hasParking = stationDetails.getHasParking();
             Boolean hasToilet = stationDetails.getHasToilet();
             ArrayList<String> LineInfo = stationDetails.getLine();
 
-            Bitmap bitmap = getLineIndicatorBitmap(LineInfo);
-
             myViewHolder.stnName.setText(name);
+
+            myViewHolder.lineIndicator.setImageBitmap(getLineIndicatorBitmap(LineInfo));
+
 
             int transparent = 0;
 
-            int toiletImg = (hasToilet) ? R.drawable.ic_wc_black_24dp : transparent;
-            int mallImg = (hasNearbyMall) ? R.drawable.ic_local_mall_black_24dp : transparent;
-            int parking = (hasParking) ? R.drawable.ic_local_parking_black_24dp : transparent;
+            int hasNearbyMallText = (hasNearbyMall)?R.drawable.rcv_ic_mall:transparent;
+            int hasToiletText = (hasNearbyMall)?R.drawable.rcv_ic_toilet:transparent;
+            int hasParkingText = (hasNearbyMall)?R.drawable.rcv_ic_parking:transparent;
 
-
-
-            myViewHolder.toilet.setImageResource(toiletImg);
-            myViewHolder.mall.setImageResource(mallImg);
-            myViewHolder.parking.setImageResource(parking);
-
-            myViewHolder.lineIndicator.setImageBitmap(bitmap);
+            myViewHolder.toilet.setImageResource(hasToiletText);
+            myViewHolder.mall.setImageResource(hasNearbyMallText);
+            myViewHolder.parking.setImageResource(hasParkingText);
 
 
 
     }
+
 
 
 
@@ -96,23 +102,27 @@ public class StationListAdapter extends
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView stnName;
-        ImageView lineIndicator, toilet, parking, mall;
+        ImageView lineIndicator,toilet, parking, mall;
+
 
         MyViewHolder(View view) {
 
             super(view);
 
             stnName = (TextView) view.findViewById(R.id.row_li_stationName);
-
             lineIndicator = (ImageView) view.findViewById(R.id.row_li_line_indicator);
-            toilet = (ImageView) view.findViewById(R.id.row_li_toilet);
-            parking = (ImageView) view.findViewById(R.id.row_li_parking);
 
+            toilet = (ImageView) view.findViewById(R.id.row_li_toilet);
+
+
+
+            parking = (ImageView) view.findViewById(R.id.row_li_parking);
             mall = (ImageView) view.findViewById(R.id.row_li_mall);
 
 
         }
     }
+
 
     @Override
     public Filter getFilter() {
@@ -217,6 +227,9 @@ public class StationListAdapter extends
 
 
     }
+
+
+
 
 
 

@@ -25,7 +25,7 @@
         android:layout_marginTop="39dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/ic_chevron_right_black_24dp"
+        android:background="@drawable/rcv_ic_chevron_right_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
