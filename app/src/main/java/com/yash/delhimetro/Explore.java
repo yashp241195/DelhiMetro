@@ -48,11 +48,13 @@ public class Explore extends AppCompatActivity {
             public void run() {
 
                 receiveData();
-                receiveDataFromIntent();
-                LoadWidgets();
+
             }
         }, 50);
 
+
+        receiveDataFromIntent();
+        LoadWidgets();
 
 
 

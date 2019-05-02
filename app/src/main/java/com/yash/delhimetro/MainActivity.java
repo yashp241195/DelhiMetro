@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
         new Handler().postDelayed(new Runnable() {
             public void run() {
 
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity
                 OnSubmitSearchRoute();
 
             }
-        }, 50);
+        }, 10);
 
 
 
