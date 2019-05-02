@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -80,10 +81,16 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
 
-        LoadData();
-        LoadWidgets();
-        OnSubmitSearchRoute();
+                LoadData();
+                LoadWidgets();
+                OnSubmitSearchRoute();
+
+            }
+        }, 50);
+
 
 
     }

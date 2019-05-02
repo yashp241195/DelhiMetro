@@ -1,6 +1,7 @@
 package com.yash.delhimetro;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,12 +20,17 @@ public class MetroMap extends AppCompatActivity {
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
 
-        PhotoView photoView = (PhotoView) findViewById(R.id.metro_map);
-        photoView.setImageResource(R.mipmap.dmrc);
+                PhotoView photoView = (PhotoView) findViewById(R.id.metro_map);
+                photoView.setImageResource(R.mipmap.dmrc);
 
-        photoView.setScaleLevels(7f,
-                8f,12f);
+                photoView.setScaleLevels(7f,
+                        8f,12f);
+
+            }
+        }, 50);
 
 
     }

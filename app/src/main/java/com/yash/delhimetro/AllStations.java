@@ -3,25 +3,18 @@ package com.yash.delhimetro;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yash.delhimetro.DataProviders.StationDetails;
-import com.yash.delhimetro.ViewAdapters.SpeedyLinearLayoutManager;
 import com.yash.delhimetro.ViewAdapters.StationListAdapter;
 
 import java.lang.reflect.Type;
@@ -69,10 +62,7 @@ public class AllStations extends AppCompatActivity {
 
 
 
-        mAdapter = new StationListAdapter(
-                getApplicationContext(),
-                stationDetailsArrayList
-        );
+        mAdapter = new StationListAdapter(stationDetailsArrayList);
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewstationList);
 
@@ -85,8 +75,8 @@ public class AllStations extends AppCompatActivity {
         mRecyclerView.setItemViewCacheSize(20);
         mRecyclerView.setDrawingCacheEnabled(true);
 
-        mRecyclerView.setLayoutManager(new SpeedyLinearLayoutManager(getApplicationContext(),
-                SpeedyLinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
 
         mRecyclerView.setAdapter(mAdapter);

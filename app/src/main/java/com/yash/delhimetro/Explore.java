@@ -2,6 +2,7 @@ package com.yash.delhimetro;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,9 +43,17 @@ public class Explore extends AppCompatActivity {
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
-        receiveData();
-        receiveDataFromIntent();
-        LoadWidgets();
+
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+
+                receiveData();
+                receiveDataFromIntent();
+                LoadWidgets();
+            }
+        }, 50);
+
+
 
 
 

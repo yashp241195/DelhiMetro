@@ -1,15 +1,10 @@
 package com.yash.delhimetro.ViewAdapters;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +14,6 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.yash.delhimetro.DataProviders.StationDetails;
 import com.yash.delhimetro.R;
 
@@ -34,13 +28,11 @@ public class StationListAdapter extends
     private ArrayList<StationDetails> stationDetailsListFull,
             stationDetailsListFiltered;
 
-    private Context context;
 
-    public StationListAdapter(Context context, ArrayList<StationDetails> stationList) {
+    public StationListAdapter(ArrayList<StationDetails> stationList) {
 
         this.stationDetailsListFull = stationList;
         this.stationDetailsListFiltered = stationList;
-        this.context = context;
 
 
     }
@@ -113,9 +105,6 @@ public class StationListAdapter extends
             lineIndicator = (ImageView) view.findViewById(R.id.row_li_line_indicator);
 
             toilet = (ImageView) view.findViewById(R.id.row_li_toilet);
-
-
-
             parking = (ImageView) view.findViewById(R.id.row_li_parking);
             mall = (ImageView) view.findViewById(R.id.row_li_mall);
 

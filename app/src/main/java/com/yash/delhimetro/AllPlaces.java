@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,9 +41,15 @@ public class AllPlaces extends AppCompatActivity {
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
 
-        receiveData();
-        setUpList();
+                receiveData();
+                setUpList();
+            }
+        }, 50);
+
+
 
 
     }
