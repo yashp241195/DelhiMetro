@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 
 public class UtilsGateway {
 
-    Graph graph;
+    private Graph graph;
     private ArrayList<StationDetails> stationDetailsArrayList;
     private HashMap<String,Integer> nameToIndexStation;
     private ArrayList<NeighbourList> neighbourListArrayList;
@@ -25,19 +25,19 @@ public class UtilsGateway {
         this.nameToIndexStation = nameToIndexStation;
         this.neighbourListArrayList = neighbourListArrayList;
         this.stationNameList = stationNameList;
+
         init();
+        populateNeighbours();
     }
 
 
     private void init(){
 
         graph = new Graph(stationNameList);
-        populateNeighbours();
-
 
     }
 
-    public void populateNeighbours(){
+    private void populateNeighbours(){
 
         for (NeighbourList neighbourList: neighbourListArrayList){
 
@@ -91,5 +91,6 @@ public class UtilsGateway {
 
         return resultStations;
     }
+
 
 }

@@ -13,6 +13,8 @@ import com.google.gson.reflect.TypeToken;
 import com.yash.delhimetro.DataProviders.NeighbourList;
 import com.yash.delhimetro.DataProviders.PlaceDetails;
 import com.yash.delhimetro.DataProviders.StationDetails;
+import com.yash.delhimetro.DataProviders.Utils.ResultPath;
+import com.yash.delhimetro.DataProviders.Utils.UtilsGateway;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -33,6 +35,12 @@ public class Explore extends AppCompatActivity {
     private ArrayList<String> stationNameArrayList = new ArrayList<>();
     private ArrayList<String> placeNameArrayList = new ArrayList<>();
 
+    // results from utility
+
+    private ArrayList<String> NearbyToiletStations = new ArrayList<>();
+    private ArrayList<String> NearbyParkingStations = new ArrayList<>();
+
+    ArrayList<ResultPath> resultPaths;
 
     private int optId;
     @Override
@@ -44,17 +52,37 @@ public class Explore extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
 
+
         new Handler().postDelayed(new Runnable() {
             public void run() {
 
                 receiveData();
+                receiveDataFromIntent();
+                LoadWidgets();
+
+                UtilsGateway utilsGateway
+                        = new UtilsGateway(
+                        stationDetailsArrayList,
+                        nameToIndexStation,
+                        neighbourListArrayList,
+                        stationNameArrayList
+                );
+
+                if(optId == R.id.optToStation || optId == R.id.optToPlace){
+                    resultPaths = utilsGateway.ComputePaths(FromStation,ToStation);
+                }
+
+                if(optId == R.id.optToToilet){
+                    NearbyToiletStations = utilsGateway.FindNearby(FromStation,"hasToilet");
+                }
+
+                if(optId == R.id.optToParking){
+                    NearbyParkingStations = utilsGateway.FindNearby(FromStation,"hasParking");
+                }
+
 
             }
         }, 50);
-
-
-        receiveDataFromIntent();
-        LoadWidgets();
 
 
 
@@ -72,8 +100,6 @@ public class Explore extends AppCompatActivity {
 
 
     }
-
-
 
     private void receiveDataFromIntent(){
 
