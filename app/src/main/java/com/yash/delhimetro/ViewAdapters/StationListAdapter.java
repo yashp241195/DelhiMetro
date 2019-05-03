@@ -76,8 +76,8 @@ public class StationListAdapter extends
             int transparent = 0;
 
             int hasNearbyMallText = (hasNearbyMall)?R.drawable.rcv_ic_mall:transparent;
-            int hasToiletText = (hasNearbyMall)?R.drawable.rcv_ic_toilet:transparent;
-            int hasParkingText = (hasNearbyMall)?R.drawable.rcv_ic_parking:transparent;
+            int hasToiletText = (hasToilet)?R.drawable.rcv_ic_toilet:transparent;
+            int hasParkingText = (hasParking)?R.drawable.rcv_ic_parking:transparent;
 
             myViewHolder.toilet.setImageResource(hasToiletText);
             myViewHolder.mall.setImageResource(hasNearbyMallText);
@@ -166,8 +166,14 @@ public class StationListAdapter extends
         );
 
         HashMap<String,Integer> LineColor = new HashMap<>();
-        LineColor.put("red",Color.RED);
-        LineColor.put("blue",Color.BLUE);
+
+        LineColor.put("red",Color.parseColor("#cc3300"));
+        LineColor.put("blue",Color.parseColor("#003399"));
+        LineColor.put("yellow",Color.parseColor("#ffcc00"));
+        LineColor.put("green",Color.parseColor("#339933"));
+        LineColor.put("magenta",Color.parseColor("#ff66ff"));
+        LineColor.put("pink",Color.parseColor("#ff0088"));
+        LineColor.put("voilet",Color.parseColor("#660066"));
 
         int x = 15;
 

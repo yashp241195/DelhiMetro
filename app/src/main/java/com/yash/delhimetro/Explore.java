@@ -35,6 +35,7 @@ public class Explore extends AppCompatActivity {
     private ArrayList<String> stationNameArrayList = new ArrayList<>();
     private ArrayList<String> placeNameArrayList = new ArrayList<>();
 
+    private UtilsGateway utilsGateway;
     // results from utility
 
     private ArrayList<String> NearbyToiletStations = new ArrayList<>();
@@ -60,29 +61,38 @@ public class Explore extends AppCompatActivity {
                 receiveDataFromIntent();
                 LoadWidgets();
 
-                UtilsGateway utilsGateway
-                        = new UtilsGateway(
-                        stationDetailsArrayList,
-                        nameToIndexStation,
-                        neighbourListArrayList,
-                        stationNameArrayList
-                );
+                try {
 
-                if(optId == R.id.optToStation || optId == R.id.optToPlace){
-                    resultPaths = utilsGateway.ComputePaths(FromStation,ToStation);
-                }
+                    utilsGateway
+                            = new UtilsGateway(
+                            stationDetailsArrayList,
+                            nameToIndexStation,
+                            neighbourListArrayList,
+                            stationNameArrayList
+                    );
 
-                if(optId == R.id.optToToilet){
-                    NearbyToiletStations = utilsGateway.FindNearby(FromStation,"hasToilet");
-                }
+                    if (optId == R.id.optToStation || optId == R.id.optToPlace) {
+                        resultPaths = utilsGateway.ComputePaths(FromStation, ToStation);
+                    }
 
-                if(optId == R.id.optToParking){
-                    NearbyParkingStations = utilsGateway.FindNearby(FromStation,"hasParking");
+                    if (optId == R.id.optToToilet) {
+
+                        NearbyToiletStations = utilsGateway.FindNearby(
+                                FromStation, "hasToilet");
+                    }
+
+                    if (optId == R.id.optToParking) {
+
+                        NearbyParkingStations = utilsGateway.FindNearby(
+                                FromStation, "hasParking");
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
 
 
             }
-        }, 50);
+        }, 100);
 
 
 
