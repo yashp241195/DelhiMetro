@@ -1,9 +1,10 @@
 package com.yash.delhimetro.DataProviders.Utils;
 
 
-import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
@@ -77,13 +78,14 @@ class StationVertex{
 
 public class Graph {
 
-    private int size;
     private HashMap<String,StationVertex> VertexHash = new HashMap<>();
-    private ArrayList<String> stationNameList = new ArrayList<>();
+    private ArrayList<String> stationNameList;
+    private HashMap<String,Integer> nameToIndex = new HashMap<>();
 
     public Graph(ArrayList<String> stationNameList){
 
-        this.size = stationNameList.size();
+        int size = stationNameList.size();
+        this.stationNameList = stationNameList;
 
         for (int i = 0; i < size; i++) {
 
@@ -92,7 +94,8 @@ public class Graph {
             String Name = stationNameList.get(i);
             stationVertex.setStationName(Name);
 
-            VertexHash.put(Name,stationVertex);
+            VertexHash.put(Name, stationVertex);
+            nameToIndex.put(Name, i);
 
         }
 
@@ -127,13 +130,21 @@ public class Graph {
                 VertexHash.containsKey(To)
         ){
 
+
+            PriorityQueue<DijkstraNode> pqResult = this.resultDijkstraSorted(From);
+            int timeLimit = (int)(this.getMinTimeTo(To,pqResult)*1.3);
+
+            Log.d("time Limit : ",Integer.valueOf(timeLimit).toString());
             ArrayList<String> path = new ArrayList<>();
-            int time = 0;
+
+            int timeTaken = 0;
 
             HashSet<String> visited = new HashSet<>();
-            visited.add(From);
 
-            this.findRoutes(From,To,time,path,visited,resultPaths);
+            path.add(From);
+            this.findRoutes(From,To,timeTaken,path,visited,resultPaths,timeLimit);
+
+            return refactorResults(resultPaths);
 
         }
 
@@ -141,74 +152,170 @@ public class Graph {
 
     }
 
-    // sorted results
+    private ArrayList<ResultPath> refactorResults(ArrayList <ResultPath> rpList){
+
+
+        // sorting the result list
+        Collections.sort(rpList);
+
+        // remove duplicates from sorted list
+        for (int i = 0; i < rpList.size()-1; i++) {
+            if(rpList.get(i).equals(rpList.get(i+1))){
+                rpList.remove(rpList.get(i));
+            }
+        }
+
+        // populate the switch counts
+
+        for (ResultPath rp: rpList) {
+
+            ArrayList<String> stationList = rp.getStationList();
+
+            // if ConnectorEdge12 and ConnectorEdge23 are not same then there
+            // is a change in line
+
+            int count = 0;
+            String ConnectorEdge12, ConnectorEdge23;
+
+
+            for (int i = 0; i < stationList.size()-2; i++) {
+
+                String f1 = stationList.get(i);
+                String f2 = stationList.get(i+1);
+                String f3 = stationList.get(i+2);
+
+                ConnectorEdge12 = ConnectorEdge23 = "";
+
+
+                ArrayList<ConnectorEdge> neighbours12 = VertexHash.get(f1).
+                        getNeighbourListStation();
+
+                for (ConnectorEdge e: neighbours12) {
+                    if(e.getToStation().equals(f2)){
+                        ConnectorEdge12 = e.getEdgeLine();
+                        break;
+                    }
+                }
+
+                ArrayList<ConnectorEdge> neighbours23 = VertexHash.get(f2).
+                        getNeighbourListStation();
+
+                for (ConnectorEdge e: neighbours23) {
+                    if(e.getToStation().equals(f3)){
+                       ConnectorEdge23 = e.getEdgeLine();
+                       break;
+
+                    }
+                }
+
+                count += (ConnectorEdge12.equals(ConnectorEdge23))?0:1;
+
+            }
+
+            rp.setSwitchCount(count);
+
+        }
+
+        // sorting the result list again
+        Collections.sort(rpList);
+
+
+        return rpList;
+    }
+
+
+    private int getMinTimeTo(
+                String To,
+                PriorityQueue<DijkstraNode>
+                        resultDijkstraSorted
+    )
+    {
+        int time = 0;
+
+
+        for(DijkstraNode dn: resultDijkstraSorted){
+            if(dn.getCurrentStation().equals(To)){
+                time = dn.getMinTimeFromSource();
+            }
+
+        }
+
+        return time;
+    }
+
+
+    // results
 
     public PriorityQueue<DijkstraNode> resultDijkstraSorted(String From){
 
         ArrayList<DijkstraNode> DijkstraResult = new ArrayList<>();
         PriorityQueue<DijkstraNode> Queue = new PriorityQueue<>();
 
-        HashMap<String,Integer> nameToIndex = new HashMap<>();
+        HashSet<String> visited = new HashSet<>();
+
 
         int i = 0;
 
         for (String stationName : stationNameList){
 
             DijkstraNode currentNode = new DijkstraNode();
-
             currentNode.setCurrentStation(stationName);
 
-            nameToIndex.put(stationName,i);
+            // set parents to null
             currentNode.setParentStation(null);
 
-            // set distance to infinity except the source station
-            int time = stationName.equals(From)?0:Integer.MAX_VALUE;
-
-            currentNode.setMinTimeFromSource(time);
-
+            // set distance to infinity
+            currentNode.setMinTimeFromSource(Integer.MAX_VALUE);
 
             i++;
 
-            Queue.add(currentNode);
             DijkstraResult.add(currentNode);
 
         }
 
-        HashSet<String> visited = new HashSet<>();
+        DijkstraResult.get(nameToIndex.get(From)).setMinTimeFromSource(0);
 
-        visited.add(From);
+        DijkstraNode currentNode = new DijkstraNode();
+        currentNode.setCurrentStation(From);
+        currentNode.setParentStation(null);
+        currentNode.setMinTimeFromSource(0);
 
+        Queue.add(currentNode);
 
 
         while (!Queue.isEmpty()){
 
-            DijkstraNode currentNode =  Queue.poll();
+            currentNode =  Queue.poll();
+
             String currentNodeName = currentNode.getCurrentStation();
+            visited.add(currentNodeName);
+
+            int FromIdx = nameToIndex.get(currentNodeName);
+
+            int minTimeFromSourceTillCurrentNode = DijkstraResult.
+                    get(FromIdx).getMinTimeFromSource();
 
 
-            for (ConnectorEdge neighbour:
-                    VertexHash.get(currentNodeName).
+            for (ConnectorEdge neighbour : VertexHash
+                    .get(currentNodeName).
                     getNeighbourListStation()
                  )
             {
 
                 String ToStationName = neighbour.getToStation();
+                int edgeTimeInterval = neighbour.getEdgeTimeInterval();
 
                 if(!visited.contains(ToStationName)){
 
                     int toIdx = nameToIndex.get(ToStationName);
 
-                    int edgeTimeInterval = neighbour.getEdgeTimeInterval();
-                    int minTimeFromSource = DijkstraResult.get(toIdx).getMinTimeFromSource();
+                    int minTimeFromSourceTillTo = DijkstraResult.get(toIdx).getMinTimeFromSource();
+                    int alt = minTimeFromSourceTillCurrentNode + edgeTimeInterval;
 
-                    int alt = minTimeFromSource + edgeTimeInterval;
-
-                    if(alt < minTimeFromSource) {
-
-                        visited.add(ToStationName);
+                    if(alt < minTimeFromSourceTillTo) {
 
                         DijkstraResult.get(toIdx).setMinTimeFromSource(alt);
-                        DijkstraResult.get(toIdx).setParentStation(From);
+                        DijkstraResult.get(toIdx).setParentStation(currentNodeName);
 
                         Queue.add(DijkstraResult.get(toIdx));
 
@@ -220,67 +327,75 @@ public class Graph {
 
         }
 
-        PriorityQueue<DijkstraNode> ResultQueue = new PriorityQueue<>();
-
-        for(DijkstraNode dijkstraNode:DijkstraResult){
-            ResultQueue.add(dijkstraNode);
-        }
-
-        return ResultQueue;
+        return new PriorityQueue<>(DijkstraResult);
 
 
     }
 
     private void findRoutes(String From, String To,
-                            Integer timeTaken,
-                            ArrayList<String> path,
+                            int timeTaken, ArrayList<String> path,
                             HashSet<String> visited,
-                            ArrayList<ResultPath> resultPaths
+                            ArrayList<ResultPath> resultPaths,
+                            int timeLimit
                             ){
 
-        StationVertex stationVertexFrom = VertexHash.get(From);
-        String FromStation = stationVertexFrom.getStationName();
 
-        visited.add(FromStation);
-
-        if(FromStation.equals(To)){
-            path.add(FromStation);
-
-            ResultPath resultPath = new ResultPath();
-
-            resultPath.setStationList(path);
-            resultPath.setTimeTaken(timeTaken);
-
-            resultPaths.add(resultPath);
+        if(timeTaken > timeLimit){
+//            Log.d("path terminate ","time limit exceed terminating.. ");
+            return;
         }
 
-        for (ConnectorEdge neighbour :
-                stationVertexFrom.
-                getNeighbourListStation()){
 
-            String ToStation = neighbour.getToStation();
+        visited.add(From);
 
-            if(!visited.contains(ToStation)){
 
-                visited.add(ToStation);
-                path.add(ToStation);
+        if(From.equals(To)){
 
-                timeTaken += neighbour.getEdgeTimeInterval();
+            ResultPath rp = new ResultPath();
 
-                findRoutes(ToStation,To,timeTaken,path,visited,resultPaths);
+            rp.setStationList(new ArrayList<String>(path));
+            rp.setTimeTaken(timeTaken);
 
-                timeTaken -= neighbour.getEdgeTimeInterval();
+//            Log.d("path founded : ",rp.toString());
+            resultPaths.add(rp);
 
+
+
+        }else {
+
+
+            for (ConnectorEdge neighbour : VertexHash.get(From).
+                    getNeighbourListStation()
+            ) {
+
+                String ToStation = neighbour.getToStation();
+
+                if (!visited.contains(ToStation)) {
+
+                    path.add(ToStation);
+                    timeTaken += neighbour.getEdgeTimeInterval();
+
+//                    Log.d("path added ",ToStation);
+
+                    this.findRoutes(ToStation, To, timeTaken,
+                            path, visited, resultPaths, timeLimit);
+
+                    path.remove(ToStation);
+                    timeTaken -= neighbour.getEdgeTimeInterval();
+
+//                    Log.d("path removed ",ToStation);
+
+
+                }
 
             }
-
-
         }
 
-        visited.remove(FromStation);
+
+        visited.remove(From);
+
 
     }
-
 
 
 

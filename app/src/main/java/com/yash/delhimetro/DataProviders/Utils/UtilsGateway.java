@@ -58,8 +58,7 @@ public class UtilsGateway {
 
     public ArrayList<String> FindNearby(String From,String Opt){
 
-        PriorityQueue<DijkstraNode> ResultQueue = new PriorityQueue<>();
-        ResultQueue =  graph.resultDijkstraSorted(From);
+        PriorityQueue<DijkstraNode> ResultQueue = graph.resultDijkstraSorted(From);
         ArrayList<String> resultStations = new ArrayList<>();
 
 

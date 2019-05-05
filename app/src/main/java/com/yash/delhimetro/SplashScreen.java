@@ -68,7 +68,7 @@ public class SplashScreen extends AppCompatActivity {
                 gson.toJson(hashMapFare));
 
         editor.putString("nameToIndexStation",
-                gson.toJson(hashMapFare));
+                gson.toJson(nameToIndexStation));
 
         editor.putString("neighbourDetails",
                 gson.toJson(neighbourListArrayList));
@@ -122,7 +122,7 @@ public class SplashScreen extends AppCompatActivity {
             case "nameToIndexStation":
                 type = new TypeToken<HashMap<String,Integer>>(){}.getType();
                 nameToIndexStation = gson.fromJson(
-                        pref.getString("hashMapFare",""),type);
+                        pref.getString("nameToIndexStation",""),type);
                 break;
 
             case "neighbourDetails":

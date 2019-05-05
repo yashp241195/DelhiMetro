@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class Explore extends AppCompatActivity {
     private ArrayList<String> NearbyToiletStations = new ArrayList<>();
     private ArrayList<String> NearbyParkingStations = new ArrayList<>();
 
-    ArrayList<ResultPath> resultPaths;
+    ArrayList<ResultPath> resultPaths = new ArrayList<>();
 
     private int optId;
     @Override
@@ -53,48 +54,51 @@ public class Explore extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
 
-
         new Handler().postDelayed(new Runnable() {
             public void run() {
+
 
                 receiveData();
                 receiveDataFromIntent();
                 LoadWidgets();
 
-                try {
 
-                    utilsGateway
-                            = new UtilsGateway(
-                            stationDetailsArrayList,
-                            nameToIndexStation,
-                            neighbourListArrayList,
-                            stationNameArrayList
-                    );
+                utilsGateway
+                        = new UtilsGateway(
+                        stationDetailsArrayList,
+                        nameToIndexStation,
+                        neighbourListArrayList,
+                        stationNameArrayList
+                );
 
-                    if (optId == R.id.optToStation || optId == R.id.optToPlace) {
-                        resultPaths = utilsGateway.ComputePaths(FromStation, ToStation);
-                    }
+                /*
+                Log.d("stationDetail : ", stationDetailsArrayList.toString());
+                Log.d("stationNameHash : ", nameToIndexStation.toString());
+                Log.d("neighbourList : ", neighbourListArrayList.toString());
+                Log.d("stationName : ", stationNameArrayList.toString());
+                */
 
-                    if (optId == R.id.optToToilet) {
+                if (optId == R.id.optToStation || optId == R.id.optToPlace) {
+                    resultPaths = utilsGateway.ComputePaths(FromStation, ToStation);
 
-                        NearbyToiletStations = utilsGateway.FindNearby(
-                                FromStation, "hasToilet");
-                    }
+                    Log.d("Transit",FromStation+"->"+ToStation);
+                    Log.d("Result Paths : ",resultPaths.toString());
 
-                    if (optId == R.id.optToParking) {
-
-                        NearbyParkingStations = utilsGateway.FindNearby(
-                                FromStation, "hasParking");
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
                 }
 
+                if (optId == R.id.optToToilet) {
 
+                    NearbyToiletStations = utilsGateway.FindNearby(
+                            FromStation, "hasToilet");
+                }
+
+                if (optId == R.id.optToParking) {
+
+                    NearbyParkingStations = utilsGateway.FindNearby(
+                            FromStation, "hasParking");
+                }
             }
-        }, 100);
-
-
+        }, 150);
 
 
     }
@@ -105,8 +109,20 @@ public class Explore extends AppCompatActivity {
     private void receiveData(){
 
         LoadDataFromSharedPref("stationDetails");
+
+        for (int i = 0; i < stationDetailsArrayList.size(); i++) {
+
+            stationNameArrayList.add(stationDetailsArrayList
+                    .get(i).getStationName());
+
+        }
+
         LoadDataFromSharedPref("placeDetails");
+
         LoadDataFromSharedPref("nameToIndexStation");
+        LoadDataFromSharedPref("neighbourDetails");
+
+        LoadDataFromSharedPref("hashMapFare");
 
 
     }
@@ -219,7 +235,7 @@ public class Explore extends AppCompatActivity {
             case "nameToIndexStation":
                 type = new TypeToken<HashMap<String,Integer>>(){}.getType();
                 nameToIndexStation = gson.fromJson(
-                        pref.getString("hashMapFare",""),type);
+                        pref.getString("nameToIndexStation",""),type);
                 break;
 
             case "neighbourDetails":

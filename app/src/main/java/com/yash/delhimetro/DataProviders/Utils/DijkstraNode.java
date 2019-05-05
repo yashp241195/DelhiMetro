@@ -35,4 +35,13 @@ public class DijkstraNode implements Comparable<DijkstraNode> {
     public void setMinTimeFromSource(Integer minTimeFromSource) {
         this.minTimeFromSource = minTimeFromSource;
     }
+
+    @NonNull
+    public String toString(){
+
+        return "Current : "+currentStation+
+                " Parent : "+parentStation+
+                " minTime : "+minTimeFromSource;
+
+    }
 }
