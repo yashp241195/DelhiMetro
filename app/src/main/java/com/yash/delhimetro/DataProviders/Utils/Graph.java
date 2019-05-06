@@ -170,6 +170,9 @@ public class Graph {
         for (ResultPath rp: rpList) {
 
             ArrayList<String> stationList = rp.getStationList();
+            ArrayList<String> summaryList = new ArrayList<>();
+
+            summaryList.add(stationList.get(0));
 
             // if ConnectorEdge12 and ConnectorEdge23 are not same then there
             // is a change in line
@@ -208,11 +211,20 @@ public class Graph {
                     }
                 }
 
-                count += (ConnectorEdge12.equals(ConnectorEdge23))?0:1;
+
+                if(!(ConnectorEdge12.equals(ConnectorEdge23))){
+                    count++;
+                    summaryList.add(stationList.get(i+1));
+                }
+
 
             }
 
+
+            summaryList.add(stationList.get(stationList.size()-1));
+
             rp.setSwitchCount(count);
+            rp.setSummaryList(summaryList);
 
         }
 

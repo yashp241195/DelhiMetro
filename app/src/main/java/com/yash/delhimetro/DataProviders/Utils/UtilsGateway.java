@@ -1,5 +1,7 @@
 package com.yash.delhimetro.DataProviders.Utils;
 
+import android.util.Log;
+
 import com.yash.delhimetro.DataProviders.NeighbourList;
 import com.yash.delhimetro.DataProviders.StationDetails;
 
@@ -56,37 +58,76 @@ public class UtilsGateway {
        return graph.getResults(From,To);
     }
 
+
+
+    class NearbyDetail{
+
+        private String name;
+        private int minDistance;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getMinDistance() {
+            return minDistance;
+        }
+
+        public void setMinDistance(int minDistance) {
+            this.minDistance = minDistance;
+        }
+    }
+
+
+
     public ArrayList<String> FindNearby(String From,String Opt){
 
-        PriorityQueue<DijkstraNode> ResultQueue = graph.resultDijkstraSorted(From);
+        PriorityQueue<DijkstraNode> ResultQueue = graph.
+                resultDijkstraSorted(From);
+
         ArrayList<String> resultStations = new ArrayList<>();
 
+        int count = 0;
 
-        while (ResultQueue.isEmpty()){
+        while (!ResultQueue.isEmpty()){
 
-            DijkstraNode dijkstraNode = ResultQueue.poll();
-            String stationName = dijkstraNode.getCurrentStation();
+            DijkstraNode dn = ResultQueue.poll();
 
-            int idx = nameToIndexStation.get(stationName);
+            String name = dn.getCurrentStation();
+
+            int idx = nameToIndexStation.get(name);
+
+
+            if(count > 3)
+                break;
+
 
 
             switch (Opt){
                 case "hasToilet":
 
-                    if(stationDetailsArrayList.get(idx).getHasToilet())
-                    resultStations.add(stationName);
-
+                    if(stationDetailsArrayList.get(idx).getHasToilet()) {
+                        resultStations.add(name);
+                        count++;
+                    }
                     break;
 
                 case "hasParking":
 
-                    if(stationDetailsArrayList.get(idx).getHasParking())
-                        resultStations.add(stationName);
-
+                    if(stationDetailsArrayList.get(idx).getHasParking()) {
+                        resultStations.add(name);
+                        count++;
+                    }
                     break;
             }
 
         }
+
+        Log.d("Nearby "+Opt+" : ",resultStations.toString());
 
         return resultStations;
     }

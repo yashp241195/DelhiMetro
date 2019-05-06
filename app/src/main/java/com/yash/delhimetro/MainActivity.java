@@ -2,6 +2,7 @@ package com.yash.delhimetro;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,10 +21,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,14 +36,17 @@ import com.yash.delhimetro.DataProviders.StationDetails;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+
+
     private ArrayList<StationDetails> stationDetailsArrayList;
     private ArrayList<PlaceDetails> placeDetailsArrayList;
-    private HashMap<String,Integer> nameToIndexStation;
     private HashMap<String,String> placeNearbyMetro = new HashMap<>();
 
     private ArrayList<String> stationNameArrayList = new ArrayList<>();
@@ -83,9 +90,9 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
         new Handler().postDelayed(new Runnable() {
             public void run() {
-
                 LoadData();
                 LoadWidgets();
                 OnSubmitSearchRoute();
@@ -378,8 +385,8 @@ public class MainActivity extends AppCompatActivity
 
             case "nameToIndexStation":
                 type = new TypeToken<HashMap<String,Integer>>(){}.getType();
-                nameToIndexStation = gson.fromJson(
-                        pref.getString("hashMapFare",""),type);
+                HashMap<String, Integer> nameToIndexStation = gson.fromJson(
+                        pref.getString("hashMapFare", ""), type);
                 break;
 
         }
@@ -401,6 +408,9 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+
+
         return true;
     }
 

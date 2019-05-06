@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class ResultPath implements Comparable<ResultPath>{
 
     private Integer timeTaken,SwitchCount=0;
-    private ArrayList<String> StationList;
+    private ArrayList<String> StationList,SummaryList;
 
 
     public ResultPath(){
@@ -62,6 +62,7 @@ public class ResultPath implements Comparable<ResultPath>{
 
         return "time : "+timeTaken+"" +
                 " switches : "+SwitchCount
+                +" summaryList : "+SummaryList
                 +" stationList : "+StationList;
     }
 
@@ -71,5 +72,13 @@ public class ResultPath implements Comparable<ResultPath>{
 
     public void setSwitchCount(Integer switchCount) {
         SwitchCount = switchCount;
+    }
+
+    public ArrayList<String> getSummaryList() {
+        return SummaryList;
+    }
+
+    public void setSummaryList(ArrayList<String> summaryList) {
+        SummaryList = summaryList;
     }
 }
