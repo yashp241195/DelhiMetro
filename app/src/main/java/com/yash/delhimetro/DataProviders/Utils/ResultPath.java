@@ -81,4 +81,6 @@ public class ResultPath implements Comparable<ResultPath>{
     public void setSummaryList(ArrayList<String> summaryList) {
         SummaryList = summaryList;
     }
+
+
 }

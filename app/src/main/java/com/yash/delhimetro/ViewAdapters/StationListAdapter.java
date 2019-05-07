@@ -174,7 +174,7 @@ public class StationListAdapter extends
         LineColor.put("magenta",Color.parseColor("#ff66ff"));
         LineColor.put("pink",Color.parseColor("#ff0088"));
         LineColor.put("voilet",Color.parseColor("#660066"));
-        LineColor.put("airport",Color.parseColor("#FFA500"));
+        LineColor.put("airport",Color.parseColor("#FF6600"));
         LineColor.put("rapid",Color.parseColor("#20B2AA"));
         LineColor.put("aqua",Color.parseColor("#00FFFF"));
 

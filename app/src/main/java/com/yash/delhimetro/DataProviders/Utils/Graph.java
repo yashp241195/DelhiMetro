@@ -3,6 +3,8 @@ package com.yash.delhimetro.DataProviders.Utils;
 
 import android.util.Log;
 
+import com.yash.delhimetro.DataProviders.StationDetails;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -81,6 +83,8 @@ public class Graph {
     private HashMap<String,StationVertex> VertexHash = new HashMap<>();
     private ArrayList<String> stationNameList;
     private HashMap<String,Integer> nameToIndex = new HashMap<>();
+    private ArrayList<StationDetails> stationDetailsArrayList;
+
 
     public Graph(ArrayList<String> stationNameList){
 
@@ -100,6 +104,8 @@ public class Graph {
         }
 
     }
+
+
 
     public void addEdgeUnDirected(String From,String To,Integer timeInterval,String Line){
 
@@ -410,7 +416,13 @@ public class Graph {
     }
 
 
+    public ArrayList<StationDetails> getStationDetailsArrayList() {
+        return stationDetailsArrayList;
+    }
 
+    public void setStationDetailsArrayList(ArrayList<StationDetails> stationDetailsArrayList) {
+        this.stationDetailsArrayList = stationDetailsArrayList;
+    }
 
 
 }

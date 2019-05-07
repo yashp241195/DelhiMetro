@@ -36,6 +36,7 @@ public class UtilsGateway {
     private void init(){
 
         graph = new Graph(stationNameList);
+        graph.setStationDetailsArrayList(stationDetailsArrayList);
 
     }
 
@@ -57,31 +58,6 @@ public class UtilsGateway {
     public ArrayList<ResultPath> ComputePaths(String From,String To){
        return graph.getResults(From,To);
     }
-
-
-
-    class NearbyDetail{
-
-        private String name;
-        private int minDistance;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getMinDistance() {
-            return minDistance;
-        }
-
-        public void setMinDistance(int minDistance) {
-            this.minDistance = minDistance;
-        }
-    }
-
 
 
     public ArrayList<String> FindNearby(String From,String Opt){

@@ -3,6 +3,7 @@ package com.yash.delhimetro;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +28,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -38,19 +40,36 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    private ArrayList<String> optionMenu = new ArrayList<>(
+            Arrays.asList("Metro","Airport Express")
+    );
+    private ArrayList<String> airport_stationNameArrayList = new ArrayList<>();
 
 
+    private Button submit;
+    private HashMap<String, Integer> nameToIndexStation;
     private ArrayList<StationDetails> stationDetailsArrayList;
     private ArrayList<PlaceDetails> placeDetailsArrayList;
     private HashMap<String,String> placeNearbyMetro = new HashMap<>();
 
     private ArrayList<String> stationNameArrayList = new ArrayList<>();
+    private ArrayList<String> all_stationNameArrayList = new ArrayList<>();
+
+    private ArrayList<String> all_except_airport_stationNameArrayList = new ArrayList<>();
+
+
     private ArrayList<String> placeNameArrayList = new ArrayList<>();
+    private ArrayList<String> all_placeNameArrayList = new ArrayList<>();
+
+    private ArrayList<String> airport_placeNameArrayList = new ArrayList<>();
+    private ArrayList<String> all_except_airport_placeNameArrayList =
+            new ArrayList<>();
 
     private static final String MY_PREFS_NAME = "Loaded Data";
     private static final String TAG = "MAIN ACTIVITY : ";
@@ -93,9 +112,20 @@ public class MainActivity extends AppCompatActivity
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
+                submit = (Button)findViewById(R.id.actM_searchRoutes);
                 LoadData();
                 LoadWidgets();
                 OnSubmitSearchRoute();
+
+                Integer s1 = all_except_airport_stationNameArrayList.size();
+                Integer s2 = airport_stationNameArrayList.size();
+
+                Integer s3 = all_except_airport_placeNameArrayList.size();
+                Integer s4 = airport_placeNameArrayList.size();
+
+                Log.d("stationSizeTest : ",s1.toString()+", "+s2.toString());
+                Log.d("placeSizeTest : ",s3.toString()+", "+s4.toString());
+
 
             }
         }, 10);
@@ -237,7 +267,7 @@ public class MainActivity extends AppCompatActivity
 
     private void OnSubmitSearchRoute(){
 
-        Button submit = (Button)findViewById(R.id.actM_searchRoutes);
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -339,6 +369,15 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    private boolean belongsToAirportLine(StationDetails stationDetails){
+        ArrayList<String> line = stationDetails.getLine();
+
+        if(line.size() == 1){
+            return line.get(0).equals("airport");
+        }
+        return false;
+    }
+
     // Load data from resources
 
     private void LoadData(){
@@ -347,17 +386,39 @@ public class MainActivity extends AppCompatActivity
         LoadDataFromSharedPref("placeDetails");
         LoadDataFromSharedPref("nameToIndexStation");
 
+
         for (StationDetails stationDetails: stationDetailsArrayList){
-            stationNameArrayList.add(stationDetails.getStationName());
+            if(belongsToAirportLine(stationDetails)){
+                airport_stationNameArrayList.add(stationDetails.getStationName());
+            }else{
+                all_except_airport_stationNameArrayList.add(stationDetails.getStationName());
+            }
+            all_stationNameArrayList.add(stationDetails.getStationName());
+
+
         }
+
+        stationNameArrayList.addAll(all_except_airport_stationNameArrayList);
 
         for (PlaceDetails placeDetails: placeDetailsArrayList){
 
             placeNearbyMetro.put(placeDetails.getPlaceName(),
                     placeDetails.getNearbyMetroStation());
 
-            placeNameArrayList.add(placeDetails.getPlaceName());
+            String pd = placeDetails.getNearbyMetroStation();
+
+            int nameToIdx = nameToIndexStation.get(pd);
+
+            if(belongsToAirportLine(stationDetailsArrayList.get(nameToIdx))){
+                airport_placeNameArrayList.add(placeDetails.getPlaceName());
+            }else{
+                all_except_airport_placeNameArrayList.add(placeDetails.getPlaceName());
+            }
+
+            all_placeNameArrayList.add(placeDetails.getPlaceName());
         }
+
+        placeNameArrayList.addAll(all_except_airport_placeNameArrayList);
 
     }
 
@@ -385,8 +446,8 @@ public class MainActivity extends AppCompatActivity
 
             case "nameToIndexStation":
                 type = new TypeToken<HashMap<String,Integer>>(){}.getType();
-                HashMap<String, Integer> nameToIndexStation = gson.fromJson(
-                        pref.getString("hashMapFare", ""), type);
+                nameToIndexStation = gson.fromJson(
+                        pref.getString("nameToIndexStation", ""), type);
                 break;
 
         }
@@ -407,7 +468,81 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.activity_main_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.spinner);
+        Spinner spinner = (Spinner) item.getActionView();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_item,optionMenu);
+
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                stationNameArrayList = new ArrayList<>();
+                placeNameArrayList = new ArrayList<>();
+
+                String opt  = optionMenu.get(position);
+
+                switch (opt){
+                    case "Metro":
+                        getSupportActionBar().setBackgroundDrawable(getResources()
+                                .getDrawable(R.drawable.gradient_red_shade));
+
+                        submit.setBackgroundColor(Color.RED);
+
+
+                        stationNameArrayList.addAll(all_except_airport_stationNameArrayList);
+                        placeNameArrayList.addAll(all_except_airport_placeNameArrayList);
+
+
+
+                        break;
+
+                    case "Airport Express":
+                        getSupportActionBar().setBackgroundDrawable(getResources()
+                                .getDrawable(R.drawable.gradient_orange_shade));
+
+                        submit.setBackgroundColor(Color.parseColor("#FF6600"));
+
+
+                        stationNameArrayList.addAll(airport_stationNameArrayList);
+                        placeNameArrayList.addAll(airport_placeNameArrayList);
+
+                        break;
+                }
+
+                stationAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                        android.R.layout.simple_list_item_1,
+                        android.R.id.text1, stationNameArrayList);
+
+                placeAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                        android.R.layout.simple_list_item_1,
+                        android.R.id.text1, placeNameArrayList);
+
+
+                acTvFrom.setAdapter(stationAdapter);
+                acTvFrom.setHint(stationNameArrayList.get(0));
+                acTvFrom.setThreshold(1);
+
+                acTvTo.setAdapter(stationAdapter);
+                acTvTo.setHint(stationNameArrayList.get(1));
+                acTvTo.setThreshold(1);
+
+
+                Log.d("stnList",stationNameArrayList.toString());
+                Log.d("size",Integer.valueOf(stationNameArrayList.size()).toString());
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 

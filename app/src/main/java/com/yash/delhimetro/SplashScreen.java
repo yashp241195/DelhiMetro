@@ -290,6 +290,9 @@ public class SplashScreen extends AppCompatActivity {
                 ToStn = row[1].trim();
                 Fare = row[2].trim();
 
+                if(Fare.equals("Null"))
+                    continue;
+
                 String query = getFareQuery(FromStn,ToStn);
 
                 hashMapFare.put(query,Integer.parseInt(Fare));

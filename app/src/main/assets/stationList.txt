@@ -257,3 +257,5 @@ VISHWAVIDYALAYA->true->true
 VODAPHONE BELVEDERE TOWERS->false->false
 WELCOME->true->true
 YAMUNA BANK->true->true
+NEW DELHI AIRPORT->true->false
+DWARKA SEC 21 AIRPORT->true->true
