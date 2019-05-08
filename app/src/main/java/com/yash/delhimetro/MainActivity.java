@@ -532,30 +532,30 @@ public class MainActivity extends AppCompatActivity
                         break;
                 }
 
+                // use the base context so that the background dropdown stay same
 
-                stationAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                stationAdapter = new ArrayAdapter<String>(getBaseContext(),
                         android.R.layout.simple_list_item_1,
                         android.R.id.text1, stationNameArrayList);
 
                 placeAdapter = new ArrayAdapter<String>(
-                        getApplicationContext(),
+                        getBaseContext(),
                         android.R.layout.simple_list_item_1,
                         android.R.id.text1, placeNameArrayList);
 
                 acTvFrom.setAdapter(stationAdapter);
                 acTvFrom.setHint(stationNameArrayList.get(0));
                 acTvFrom.setThreshold(1);
-                acTvFrom.setDropDownBackgroundDrawable(new ColorDrawable(
-                        (Color.LTGRAY)));
+                acTvFrom.setText("");
 
 
                 OptRadioGroup.check(R.id.optToStation);
 
                 acTvTo.setAdapter(stationAdapter);
-                acTvTo.setHint(stationNameArrayList.get(2));
+                acTvTo.setHint(stationNameArrayList.get(1));
                 acTvTo.setThreshold(1);
-                acTvTo.setDropDownBackgroundDrawable(new ColorDrawable(
-                        (Color.LTGRAY)));
+                acTvTo.setText("");
+
 
                 Log.d("stnList",stationNameArrayList.toString());
                 Log.d("size",Integer.valueOf(stationNameArrayList.size()).toString());
