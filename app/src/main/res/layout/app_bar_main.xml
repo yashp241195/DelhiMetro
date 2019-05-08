@@ -36,7 +36,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_map_text"
-        android:backgroundTint="@android:color/holo_red_light"
         />
 
 </android.support.design.widget.CoordinatorLayout>

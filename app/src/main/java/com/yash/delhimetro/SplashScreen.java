@@ -201,7 +201,7 @@ public class SplashScreen extends AppCompatActivity {
     // Load Data from Assets sequentially
 
     private void LoadDataFromAssets(){
-        LoadFareAssets();
+//        LoadFareAssets();
         LoadStationAssets();
         LoadPlaceAssets();
         LoadAdjList();

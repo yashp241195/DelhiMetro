@@ -2,6 +2,7 @@ package com.yash.delhimetro;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity
 
     private String ErrorText = "Error : ";
 
+    private FloatingActionButton fab;
 
 
     @Override
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -175,7 +177,7 @@ public class MainActivity extends AppCompatActivity
 
                         acTvTo.setVisibility(View.VISIBLE);
                         acTvTo.setAdapter(stationAdapter);
-                        acTvTo.setHint(stationNameArrayList.get(0));
+                        acTvTo.setHint(stationNameArrayList.get(1));
 
                         break;
 
@@ -473,10 +475,11 @@ public class MainActivity extends AppCompatActivity
         MenuItem item = menu.findItem(R.id.spinner);
         Spinner spinner = (Spinner) item.getActionView();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
                 R.layout.spinner_item,optionMenu);
 
         spinner.setAdapter(adapter);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -489,8 +492,14 @@ public class MainActivity extends AppCompatActivity
 
                 switch (opt){
                     case "Metro":
-                        getSupportActionBar().setBackgroundDrawable(getResources()
-                                .getDrawable(R.drawable.gradient_red_shade));
+                        try {
+                            getSupportActionBar().setBackgroundDrawable(
+                                    new ColorDrawable(Color.RED));
+                            fab.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
 
                         submit.setBackgroundColor(Color.RED);
 
@@ -503,10 +512,18 @@ public class MainActivity extends AppCompatActivity
                         break;
 
                     case "Airport Express":
-                        getSupportActionBar().setBackgroundDrawable(getResources()
-                                .getDrawable(R.drawable.gradient_orange_shade));
 
-                        submit.setBackgroundColor(Color.parseColor("#FF6600"));
+                        int orangeColor = Color.parseColor("#FF6600");
+
+                        try {
+                            getSupportActionBar().setBackgroundDrawable(
+                                    new ColorDrawable(orangeColor));
+                            fab.setBackgroundTintList(ColorStateList.valueOf(orangeColor));
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        submit.setBackgroundColor(orangeColor);
 
 
                         stationNameArrayList.addAll(airport_stationNameArrayList);
@@ -515,23 +532,30 @@ public class MainActivity extends AppCompatActivity
                         break;
                 }
 
+
                 stationAdapter = new ArrayAdapter<String>(getApplicationContext(),
                         android.R.layout.simple_list_item_1,
                         android.R.id.text1, stationNameArrayList);
 
-                placeAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                placeAdapter = new ArrayAdapter<String>(
+                        getApplicationContext(),
                         android.R.layout.simple_list_item_1,
                         android.R.id.text1, placeNameArrayList);
-
 
                 acTvFrom.setAdapter(stationAdapter);
                 acTvFrom.setHint(stationNameArrayList.get(0));
                 acTvFrom.setThreshold(1);
+                acTvFrom.setDropDownBackgroundDrawable(new ColorDrawable(
+                        (Color.LTGRAY)));
+
+
+                OptRadioGroup.check(R.id.optToStation);
 
                 acTvTo.setAdapter(stationAdapter);
-                acTvTo.setHint(stationNameArrayList.get(1));
+                acTvTo.setHint(stationNameArrayList.get(2));
                 acTvTo.setThreshold(1);
-
+                acTvTo.setDropDownBackgroundDrawable(new ColorDrawable(
+                        (Color.LTGRAY)));
 
                 Log.d("stnList",stationNameArrayList.toString());
                 Log.d("size",Integer.valueOf(stationNameArrayList.size()).toString());
@@ -546,8 +570,11 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
