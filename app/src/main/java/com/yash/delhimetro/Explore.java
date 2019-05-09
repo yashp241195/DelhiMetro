@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -14,8 +17,9 @@ import com.google.gson.reflect.TypeToken;
 import com.yash.delhimetro.DataProviders.NeighbourList;
 import com.yash.delhimetro.DataProviders.PlaceDetails;
 import com.yash.delhimetro.DataProviders.StationDetails;
-import com.yash.delhimetro.DataProviders.Utils.ResultPath;
+import com.yash.delhimetro.DataProviders.ResultPath;
 import com.yash.delhimetro.DataProviders.Utils.UtilsGateway;
+import com.yash.delhimetro.ViewAdapters.RouteSummaryListAdapter;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -43,6 +47,8 @@ public class Explore extends AppCompatActivity {
     private ArrayList<String> NearbyParkingStations = new ArrayList<>();
 
     ArrayList<ResultPath> resultPaths = new ArrayList<>();
+    RecyclerView recyclerView;
+    RouteSummaryListAdapter routeSummaryListAdapter;
 
     private int optId;
     @Override
@@ -84,6 +90,34 @@ public class Explore extends AppCompatActivity {
                     Log.d("Transit",FromStation+"->"+ToStation);
                     Log.d("Result Paths : ",resultPaths.toString());
 
+                    routeSummaryListAdapter = new RouteSummaryListAdapter(
+                            resultPaths,
+                            stationDetailsArrayList,
+                            nameToIndexStation
+
+                    );
+
+
+
+                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.RouteSummaryListView);
+
+
+                    recyclerView.addItemDecoration(new DividerItemDecoration(
+                            getApplicationContext(),
+                            DividerItemDecoration.VERTICAL));
+
+
+                    recyclerView.setItemViewCacheSize(20);
+                    recyclerView.setDrawingCacheEnabled(true);
+
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    recyclerView.setLayoutManager(mLayoutManager);
+
+
+                    recyclerView.setAdapter(routeSummaryListAdapter);
+
+
+
                 }
 
                 if (optId == R.id.optToToilet) {
@@ -98,7 +132,7 @@ public class Explore extends AppCompatActivity {
                             FromStation, "hasParking");
                 }
             }
-        }, 150);
+        }, 50);
 
 
     }

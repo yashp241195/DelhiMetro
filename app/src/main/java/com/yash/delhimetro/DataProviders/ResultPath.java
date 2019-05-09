@@ -1,4 +1,4 @@
-package com.yash.delhimetro.DataProviders.Utils;
+package com.yash.delhimetro.DataProviders;
 
 import android.support.annotation.NonNull;
 
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class ResultPath implements Comparable<ResultPath>{
 
-    private Integer timeTaken,SwitchCount=0;
-    private ArrayList<String> StationList,SummaryList;
+    private Integer timeTaken, SwitchCount = 0, fare = 0, stops = 0, mallCount = 0;
+    private ArrayList<String> StationList, SummaryList;
 
 
     public ResultPath(){
@@ -83,4 +83,27 @@ public class ResultPath implements Comparable<ResultPath>{
     }
 
 
+    public Integer getFare() {
+        return fare;
+    }
+
+    public void setFare(Integer fare) {
+        this.fare = fare;
+    }
+
+    public Integer getStops() {
+        return stops;
+    }
+
+    public void setStops(Integer stops) {
+        this.stops = stops;
+    }
+
+    public Integer getMallCount() {
+        return mallCount;
+    }
+
+    public void setMallCount(Integer mallCount) {
+        this.mallCount = mallCount;
+    }
 }

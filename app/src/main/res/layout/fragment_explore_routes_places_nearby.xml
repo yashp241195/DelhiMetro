@@ -8,7 +8,7 @@
     tools:context=".ui.main.PlaceholderFragmentRoutes">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewStationRoutes"
+        android:id="@+id/recyclerViewNearbyPlaces"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

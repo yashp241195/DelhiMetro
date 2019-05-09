@@ -3,6 +3,7 @@ package com.yash.delhimetro.DataProviders.Utils;
 import android.util.Log;
 
 import com.yash.delhimetro.DataProviders.NeighbourList;
+import com.yash.delhimetro.DataProviders.ResultPath;
 import com.yash.delhimetro.DataProviders.StationDetails;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class UtilsGateway {
         }
     }
 
-    public ArrayList<ResultPath> ComputePaths(String From,String To){
+    public ArrayList<ResultPath> ComputePaths(String From, String To){
        return graph.getResults(From,To);
     }
 

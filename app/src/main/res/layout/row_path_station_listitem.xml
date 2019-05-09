@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/background_light"
+
+    >
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/row_path_summary_stops_icon"
+            android:layout_width="46dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/row_path_summary_stops_tv"
+            app:layout_constraintStart_toEndOf="@+id/row_path_summary_time_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rcv_ic_traffic_signal"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/row_path_summary_switch_icon"
+            android:layout_width="64dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:padding="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/row_path_summary_interchange_tv"
+            app:layout_constraintStart_toEndOf="@+id/row_path_summary_stops_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rcv_ic_switch"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/row_path_summary_fare_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/row_path_summary_fare_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rcv_ic_rupee"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/row_path_summary_time_icon"
+            android:layout_width="43dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:padding="3dp"
+            app:layout_constraintBottom_toTopOf="@+id/row_path_summary_time_tv"
+            app:layout_constraintStart_toEndOf="@+id/row_path_summary_fare_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rcv_ic_clock"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/row_path_summary_mall_icon"
+            android:layout_width="72dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:padding="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/row_path_summary_mall_tv"
+            app:layout_constraintStart_toEndOf="@+id/row_path_summary_switch_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rcv_ic_mall"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/row_path_summary_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Time\n250 min"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_path_summary_fare_tv" />
+
+        <TextView
+            android:id="@+id/row_path_summary_stops_tv"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Stops\n10"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_path_summary_time_tv" />
+
+        <TextView
+            android:id="@+id/row_path_summary_fare_tv"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="7dp"
+            android:text="Fare\nRs 200"
+            android:textAlignment="viewStart"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/row_path_summary_interchange_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Interchange\n10"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_path_summary_stops_tv" />
+
+        <TextView
+            android:id="@+id/row_path_summary_mall_tv"
+            android:layout_width="72dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Nearby Malls\n10"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_path_summary_interchange_tv" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <ImageView
+            android:id="@+id/row_path_summary_explore_path"
+            android:layout_width="36dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rcv_ic_chevron_right_black_24dp"
+            tools:ignore="VectorDrawableCompat" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/row_path_summary_explore_path_listView"
+            android:layout_width="0dp"
+            android:minHeight="100dp"
+
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingStart="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/row_path_summary_explore_path"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

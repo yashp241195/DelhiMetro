@@ -11,7 +11,8 @@
     <string name="menu_recharge">Recharge Metro Card PayTm</string>
     <string name="actm_labelfrom">From Station</string>
     <string name="actm_labelto">To</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">Route</string>
+    <string name="tab_text_2">Nearby Places</string>
     <string name="title_activity_explore_routes">ExploreRoutes</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

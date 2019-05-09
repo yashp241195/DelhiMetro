@@ -3,6 +3,7 @@ package com.yash.delhimetro.DataProviders.Utils;
 
 import android.util.Log;
 
+import com.yash.delhimetro.DataProviders.ResultPath;
 import com.yash.delhimetro.DataProviders.StationDetails;
 
 import java.util.ArrayList;
@@ -127,7 +128,7 @@ public class Graph {
         VertexHash.get(From).getNeighbourListStation().add(connectorEdge);
     }
 
-    public ArrayList<ResultPath> getResults(String From,String To){
+    public ArrayList<ResultPath> getResults(String From, String To){
 
         ArrayList<ResultPath> resultPaths = new ArrayList<>();
 
