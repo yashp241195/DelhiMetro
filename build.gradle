@@ -19,6 +19,7 @@ allprojects {
         google()
         maven { url "https://jitpack.io" }
         maven { url 'http://yanzm.github.io/MaterialTabHost/repository' }
+        mavenCentral()
 
         jcenter()
         

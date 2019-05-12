@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
         this.nameToIndexStation = nameToIndexStation;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView fareTv,timeTv,stopTv,interchangeTv,mallTv;
         RecyclerView recyclerViewPathSummary;
@@ -54,26 +55,29 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
             mallTv = (TextView) view.findViewById(R.id.row_path_summary_mall_tv);
             recyclerViewPathSummary = (RecyclerView)view.findViewById(R.id.row_path_summary_explore_path_listView);
 
+            view.setOnClickListener(this);
 
+        }
+
+        @Override
+        public void onClick(View v) {
+            onClickAction(v, getAdapterPosition());
         }
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,final int i) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,int i) {
+
+
         View itemView = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.row_path_station_listitem,
                         viewGroup,
                         false
                 );
+
         context = viewGroup.getContext();
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickAction(v,i);
-            }
-        });
 
         return new MyViewHolder(itemView);
     }
@@ -122,9 +126,26 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
 
         Log.d("path : ",pathSummaryStationList.toString());
 
-        myViewHolder.recyclerViewPathSummary.addItemDecoration(new DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL));
+//        myViewHolder.recyclerViewPathSummary.addItemDecoration(new DividerItemDecoration(
+//                context,
+//                DividerItemDecoration.VERTICAL));
+
+        myViewHolder.recyclerViewPathSummary.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean b) {
+
+            }
+        });
 
 
         myViewHolder.recyclerViewPathSummary.setItemViewCacheSize(20);

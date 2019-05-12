@@ -10,27 +10,24 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,7 +38,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -109,28 +105,19 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        submit = (Button)findViewById(R.id.actM_searchRoutes);
+
 
 
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                submit = (Button)findViewById(R.id.actM_searchRoutes);
                 LoadData();
                 LoadWidgets();
                 OnSubmitSearchRoute();
 
-                Integer s1 = all_except_airport_stationNameArrayList.size();
-                Integer s2 = airport_stationNameArrayList.size();
-
-                Integer s3 = all_except_airport_placeNameArrayList.size();
-                Integer s4 = airport_placeNameArrayList.size();
-
-                Log.d("stationSizeTest : ",s1.toString()+", "+s2.toString());
-                Log.d("placeSizeTest : ",s3.toString()+", "+s4.toString());
-
-
             }
-        }, 10);
+        }, 20);
 
 
 

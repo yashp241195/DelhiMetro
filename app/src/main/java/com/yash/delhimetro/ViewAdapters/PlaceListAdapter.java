@@ -2,19 +2,24 @@ package com.yash.delhimetro.ViewAdapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yash.delhimetro.DataProviders.PlaceDetails;
 import com.yash.delhimetro.R;
 import com.yash.delhimetro.WebViewExplorePlace;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +29,15 @@ public class PlaceListAdapter extends RecyclerView.Adapter<
     private List<PlaceDetails> placeDetailsList,
             placeDetailsListFiltered;
 
+    // context required for getting images from assets folder
+    private Context context;
 
-    public PlaceListAdapter(ArrayList<PlaceDetails> placeList) {
+
+    public PlaceListAdapter(Context context,
+            ArrayList<PlaceDetails> placeList) {
         this.placeDetailsList = placeList;
         this.placeDetailsListFiltered = placeList;
+        this.context = context;
     }
 
     @Override
@@ -38,9 +48,10 @@ public class PlaceListAdapter extends RecyclerView.Adapter<
 
 
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView placeName,placeType,placeNearbyMetro;
+        ImageView placeImage;
 
         MyViewHolder(View view) {
             super(view);
@@ -49,24 +60,24 @@ public class PlaceListAdapter extends RecyclerView.Adapter<
             placeType = (TextView) view.findViewById(R.id.row_li_val_placeType);
             placeNearbyMetro = (TextView) view.findViewById(R.id.row_li_val_nearby_metro);
 
+            placeImage =(ImageView)view.findViewById(R.id.row_li_place_imageView);
 
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onClickAction(v,getAdapterPosition());
         }
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,final int i) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,int i) {
 
         View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.row_place_listitem, viewGroup,
+                .inflate(R.layout.row_place_listitem_cardview, viewGroup,
                         false);
-
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickAction(v,i);
-            }
-        });
 
         return new MyViewHolder(itemView);
     }
@@ -88,6 +99,8 @@ public class PlaceListAdapter extends RecyclerView.Adapter<
     }
 
 
+
+
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
 
@@ -97,12 +110,33 @@ public class PlaceListAdapter extends RecyclerView.Adapter<
 
         String name = placeDetails.getPlaceName();
         String type = placeDetails.getPlaceType();
+        String placeImage = placeDetails.getPlaceImage();
         String nearbyMetroText = placeDetails.getNearbyMetroStation()
                 +" ("+placeDetails.getDistance()+" km) ";
 
         myViewHolder.placeName.setText(name);
         myViewHolder.placeType.setText(type);
         myViewHolder.placeNearbyMetro.setText(nearbyMetroText);
+
+//        Log.d("placeImage : ",placeImage);
+        String imageFilePath = "placeImages/"+placeImage;
+
+        try {
+            InputStream ims = context.getAssets().open(imageFilePath);
+
+            // load image as Drawable
+            Drawable d = Drawable.createFromStream(ims, null);
+
+            myViewHolder.placeImage.setImageDrawable(d);
+
+            ims .close();
+
+        } catch (IOException e) {
+
+            Log.e("placeAdapter Error",imageFilePath+" image not found");
+            myViewHolder.placeImage.setImageResource(R.drawable.rcv_ic_mall);
+        }
+
 
     }
 

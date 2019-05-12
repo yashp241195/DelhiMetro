@@ -81,18 +81,18 @@ public class WebViewExplorePlace extends AppCompatActivity {
 
     private void setUpUrlHash(){
 
-        urlHash.put("home","https://www.google.com");
+        urlHash.put("home","https://www.google.com/search?q="+placeName);
 
 
-        urlHash.put("btnTimings","");
-        urlHash.put("btnNearbyMetro","");
-        urlHash.put("btnPetrol","");
+        urlHash.put("btnTimings","https://www.google.com/search?q="+placeName+"+timings");
+        urlHash.put("btnNearbyMetro","https://www.google.com/search?q=metro+stations+near+"+placeName);
+        urlHash.put("btnPetrol","https://www.google.com/search?q=petrol+pump+near+"+placeName);
 
 
 
-        urlHash.put("btnImages","");
-        urlHash.put("btnATM","");
-        urlHash.put("btnYoutube","");
+        urlHash.put("btnImages","https://www.google.com/search?tbm=isch&q="+placeName);
+        urlHash.put("btnATM","https://www.google.com/search?q=atm+near+"+placeName);
+        urlHash.put("btnYoutube","https://www.youtube.com/results?search_query="+placeName);
 
 
 
@@ -191,7 +191,7 @@ public class WebViewExplorePlace extends AppCompatActivity {
         btnNearbyMetro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                LoadUrlFrom(urlHash.get("btnNearbyMetro"));
             }
         });
 

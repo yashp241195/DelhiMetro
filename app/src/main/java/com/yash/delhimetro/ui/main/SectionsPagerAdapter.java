@@ -40,7 +40,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             fragment = PlaceholderFragmentRoutes.newInstance(position + 1,stationNameList);
         } else {
-            fragment = PlaceholderFragmentPlaceNearby.newInstance(position + 1);
+            fragment = PlaceholderFragmentPlaceNearby.newInstance(position + 1,stationNameList);
         }
 
         return fragment;

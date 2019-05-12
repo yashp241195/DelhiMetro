@@ -3,18 +3,20 @@ package com.yash.delhimetro;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.widget.SearchView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yash.delhimetro.DataProviders.PlaceDetails;
+import com.yash.delhimetro.ViewAdapters.GridSpacingItemDecoration;
 import com.yash.delhimetro.ViewAdapters.PlaceListAdapter;
 
 import java.lang.reflect.Type;
@@ -42,8 +44,12 @@ public class AllPlaces extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             public void run() {
 
-                receiveData();
-                setUpList();
+                try {
+                    receiveData();
+                    setUpList();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }, 50);
 
@@ -59,26 +65,38 @@ public class AllPlaces extends AppCompatActivity {
 
     }
 
+
     private void setUpList(){
 
 
-       mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewplaceList);
-       mRecyclerView.setHasFixedSize(true);
+            mAdapter = new PlaceListAdapter(AllPlaces.this,placeDetailsArrayList);
 
-       mLayoutManager = new LinearLayoutManager(this);
-       mRecyclerView.setLayoutManager(mLayoutManager);
+            mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewplaceList);
+            mRecyclerView.setHasFixedSize(true);
 
-       mRecyclerView.addItemDecoration(new DividerItemDecoration(
-               getApplicationContext(),
-               DividerItemDecoration.VERTICAL));
+            mLayoutManager = new GridLayoutManager(this,
+               2);
 
-       mAdapter = new PlaceListAdapter(placeDetailsArrayList);
-       mRecyclerView.setAdapter(mAdapter);
+
+           mRecyclerView.addItemDecoration(
+                   new GridSpacingItemDecoration(2, dpToPx(10),
+                           true));
+
+           mRecyclerView.setLayoutManager(mLayoutManager);
+           mRecyclerView.setAdapter(mAdapter);
+
 
 
 
 
    }
+
+   // used for spacing in Grid Spacing change density pixel to pixel
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
 
 
     // Receive data from shared preference

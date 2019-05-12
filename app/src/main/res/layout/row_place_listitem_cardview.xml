@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="170dp"
+        android:layout_height="250dp"
+        android:layout_margin="4dp"
+        app:cardCornerRadius="10dp">
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/row_li_place_imageView"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:riv_mutate_background="true" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/row_li_placeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/transparent_card"
+                    android:fontFamily="sans-serif"
+                    android:text="TextView"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/constraintLayout6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/transparent_card">
+
+                <TextView
+                    android:id="@+id/row_li_val_placeType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="serif"
+                    android:text="Monument of India"
+                    android:textAlignment="textEnd"
+                    android:textColor="#fff"
+                    android:textSize="12sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/transparent_card">
+
+                <TextView
+                    android:id="@+id/row_li_place_nearby_metro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Nearby Metro Station"
+                    android:textColor="#fff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/row_li_val_nearby_metro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="TextView"
+                    android:textColor="#fff"
+                    android:textSize="12sp" />
+            </FrameLayout>
+
+
+        </FrameLayout>
+    </android.support.v7.widget.CardView>
+</FrameLayout>

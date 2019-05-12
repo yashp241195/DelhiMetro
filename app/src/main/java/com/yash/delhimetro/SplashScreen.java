@@ -130,7 +130,6 @@ public class SplashScreen extends AppCompatActivity {
                 neighbourListArrayList = gson.fromJson(
                         pref.getString("neighbourDetails",""),type);
                 break;
-
         }
 
     }

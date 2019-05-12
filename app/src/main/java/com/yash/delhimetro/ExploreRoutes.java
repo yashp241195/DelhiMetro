@@ -68,7 +68,6 @@ public class ExploreRoutes extends AppCompatActivity {
                 assert getSupportActionBar()!=null;
                 switch (i){
                     case 0:
-
                         getSupportActionBar().setTitle(R.string.tab_text_1);
                         break;
                     case 1:

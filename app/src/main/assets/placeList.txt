@@ -1,5 +1,5 @@
 placeName->NearbyStation->Distance->placeType->placeImage
-PACIFIC MALL->VAISHALI->1.5 km->MALL->pacific_mall
+PACIFIC MALL->VAISHALI->1.5 km->MALL->pacific_mall.jpg
 SHOPPRIX MALL->VAISHALI->2 km->MALL->shopprix_mall
 ANSAL PLAZA->VAISHALI->0.7 KM->MALL->ansal_plaza
 EMPORIO MALL->DELHI AERO CITY->3.1 KM->MALL->emporio_mall

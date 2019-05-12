@@ -58,13 +58,13 @@ public class WebQuery extends AppCompatActivity {
 
     private void setUpUrlHash(){
 
-        urlHash.put("home","https://www.google.com");
-        urlHash.put("metroOfficial","");
-        urlHash.put("foodQ","");
-        urlHash.put("foodYt","");
-        urlHash.put("travelQ","");
-        urlHash.put("travelYt","");
-        urlHash.put("delhiWiki","");
+        urlHash.put("home","https://www.google.com/search?q=delhi+metro");
+        urlHash.put("metroOfficial","https://www.google.com/search?q=delhi+metro+official");
+        urlHash.put("foodQ","https://www.google.com/search?q=delhi+food+quora");
+        urlHash.put("foodYt","https://www.youtube.com/results?search_query=food+delhi");
+        urlHash.put("travelQ","https://www.google.com/search?q=delhi+travel+quora");
+        urlHash.put("travelYt","https://www.youtube.com/results?search_query=travel+delhi");
+        urlHash.put("delhiWiki","https://www.google.com/search?q=delhi+wikipedia");
 
     }
 
