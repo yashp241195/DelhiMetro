@@ -206,7 +206,7 @@ public class WebQuery extends AppCompatActivity {
             screenSizeFull = false;
 
             // Now btn should display hint to go to full screen
-            btnText = "FULL";
+            btnText = "FULL SCREEN";
             screenSizeIcon = R.drawable.ic_unfold_more_black_24dp;
 
         }

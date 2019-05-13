@@ -260,11 +260,7 @@ public class Explore extends AppCompatActivity {
                         pref.getString("placeDetails",""),type);
                 break;
 
-            case "hashMapFare":
-                type = new TypeToken<HashMap<String,Integer>>(){}.getType();
-                hashMapFare = gson.fromJson(
-                        pref.getString("hashMapFare",""),type);
-                break;
+
 
             case "nameToIndexStation":
                 type = new TypeToken<HashMap<String,Integer>>(){}.getType();

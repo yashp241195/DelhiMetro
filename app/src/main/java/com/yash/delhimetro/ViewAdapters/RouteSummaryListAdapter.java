@@ -3,7 +3,6 @@ package com.yash.delhimetro.ViewAdapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -126,9 +125,6 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
 
         Log.d("path : ",pathSummaryStationList.toString());
 
-//        myViewHolder.recyclerViewPathSummary.addItemDecoration(new DividerItemDecoration(
-//                context,
-//                DividerItemDecoration.VERTICAL));
 
         myViewHolder.recyclerViewPathSummary.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
