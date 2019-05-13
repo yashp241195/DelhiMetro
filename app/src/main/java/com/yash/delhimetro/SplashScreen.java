@@ -3,10 +3,13 @@ package com.yash.delhimetro;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -26,6 +29,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -39,15 +43,14 @@ public class SplashScreen extends AppCompatActivity {
     private JSONObject AdjListJson;
 
     private static final String TAG = "Splash Screen";
-    private static final String MANUAL_TEST = "MANUAL TEST";
     private static final String MY_PREFS_NAME = "Loaded Data";
-    private static int SLEEP_TIME = 15000;
 
     private final String YES = "Yes";
     private final String NO = "No";
 
     private SliderLayout mDemoSlider;
 
+    private ArrayList<FareMetro> fareMetroArrayList = new ArrayList<>();
 
 
     @Override
@@ -55,24 +58,35 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
-        if(isLoaded("fareDetailsLoaded")){
-            SLEEP_TIME = 500;
-            // testing fare details
-            String From = "VAISHALI";
-            String To = "RAJIV CHOWK";
-
-            getFareFromDB(this,From,To);
-
-        }else {
+        if(isUnLoaded("AllDetailsLoaded")) {
             setUpSlider();
+        }else{
+            removeDisplay();
         }
 
-        LoadDataOnDifferentThread();
+        DownloadFilesTask myAsyncTasks = new DownloadFilesTask();
+        myAsyncTasks.execute();
 
     }
 
 
+    private void removeDisplay(){
+        ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
+        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
+        mDemoSlider.setVisibility(View.GONE);
+        TextView textView = (TextView)findViewById(R.id.tv2);
+        textView.setVisibility(View.GONE);
+    }
+
+
+    /*
+    * Image slider
+    * */
+
+
     private void setUpSlider(){
+
         mDemoSlider = (SliderLayout)findViewById(R.id.slider);
 
 
@@ -113,9 +127,13 @@ public class SplashScreen extends AppCompatActivity {
         super.onStop();
     }
 
+/*
+* Loading data from assets and saving into Shared Preferences
+* of the application
+* */
 
 
-    private boolean isLoaded(String choice){
+    private boolean isUnLoaded(String choice){
         SharedPreferences pref = getApplicationContext().
                 getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
@@ -123,9 +141,9 @@ public class SplashScreen extends AppCompatActivity {
 
         if(LoadStatus == null) {
 
-            return false;
+            return true;
         }
-        return LoadStatus.equals(YES);
+        return !LoadStatus.equals(YES);
     }
 
 
@@ -136,69 +154,95 @@ public class SplashScreen extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
         Gson gson = new Gson();
 
-
-
+        int count = 0;
 
         // Saving data to shared preference
 
-        if(!isLoaded("stationDetailsLoaded")) {
+        // don't mess with the order of loading the data
 
-            editor.putString("stationDetails",
-                    gson.toJson(stationDetailsArrayList));
+        if(isUnLoaded("stationDetailsLoaded")) {
 
+            LoadStationAssets();
+
+            editor.putString("stationDetails", gson.toJson(stationDetailsArrayList));
             editor.putString("stationDetailsLoaded", YES);
+
+            count++;
             Log.d("Loading status : ","stationDetailsLoaded YES");
         }
         else{
             Log.d("Loading status : ","stationDetailsLoaded YES already");
         }
-        if(!isLoaded("placeDetailsLoaded")) {
-            editor.putString("placeDetails",
-                    gson.toJson(placeDetailsArrayList));
 
+
+
+
+        if(isUnLoaded("placeDetailsLoaded")) {
+
+            LoadPlaceAssets();
+
+            editor.putString("placeDetails",gson.toJson(placeDetailsArrayList));
             editor.putString("placeDetailsLoaded", YES);
+
+            count++;
             Log.d("Loading status : ","placeDetailsLoaded YES");
 
         }
         else{
             Log.d("Loading status : ","placeDetailsLoaded YES already");
         }
-        if(!isLoaded("nameToIndexStationLoaded")) {
+
+
+        if(isUnLoaded("nameToIndexStationLoaded")) {
 
             editor.putString("nameToIndexStation",
                     gson.toJson(nameToIndexStation));
 
             editor.putString("nameToIndexStationLoaded", YES);
+            count++;
             Log.d("Loading status : ","nameToIndexStationLoaded YES");
 
         }
         else{
             Log.d("Loading status : ","nameToIndexStationLoaded YES already");
         }
-        if(!isLoaded("neighbourDetailsLoaded")) {
+
+
+        if(isUnLoaded("neighbourDetailsLoaded")) {
+
+            LoadAdjList();
+            populateNeighbours();
+
+
             editor.putString("neighbourDetails",
                     gson.toJson(neighbourListArrayList));
 
+
+
             editor.putString("neighbourDetailsLoaded", YES);
+            count++;
             Log.d("Loading status : ","neighbourDetailsLoaded YES");
 
         }else{
             Log.d("Loading status : ","neighbourDetailsLoaded YES already");
         }
 
-        if(!isLoaded("fareDetailsLoaded")){
-            String From = "DHAULA KUAN";
-            String To = "DWARKA SEC 21 AIRPORT";
+
+        if(isUnLoaded("fareDetailsLoaded")){
+
 
             readFareFromAsset(this);
-            getFareFromDB(this,From,To);
 
             editor.putString("fareDetailsLoaded", YES);
+            count++;
             Log.d("Loading status : ","fareDetailsLoaded YES");
 
         }else{
             Log.d("Loading status : ","fareDetailsLoaded YES already");
         }
+
+
+        editor.putString("AllDetailsLoaded", (count == 5)?YES:NO);
 
         editor.apply();
 
@@ -214,142 +258,6 @@ public class SplashScreen extends AppCompatActivity {
 
     }
 
-    private void readFareFromAsset(Context context){
-
-
-        SharedPreferences pref = getApplicationContext().
-                getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-
-        SharedPreferences.Editor edit = pref.edit();
-
-        BufferedReader reader = null;
-        try {
-            MetroFareDBHandler metroFareDBHandler = new MetroFareDBHandler(context);
-
-            reader = new BufferedReader(
-                    new InputStreamReader(
-                            getAssets().open("fareList.txt")
-                    )
-            );
-
-
-
-
-            // do reading, usually loop until end of file reading
-            String mLine;
-            while ((mLine = reader.readLine()) != null) {
-
-                // process line
-
-
-                String[] row = mLine.split("->");
-
-                String From = row[0];
-                String To = row[1];
-                row[2] = row[2].equals("Null")?"-1":row[2];
-                int fare = Integer.parseInt(row[2]);
-
-                FareMetro fareMetro = new FareMetro(From,To,fare);
-                Log.d("Fare : ",fareMetro.toString());
-                metroFareDBHandler.addFareMetro(fareMetro);
-
-
-
-            }
-
-            edit.putString("fareDetailsLoaded",YES);
-
-        } catch (Exception e) {
-            //log the exception
-
-            edit.clear();
-            e.printStackTrace();
-            edit.putString("fareDetailsLoaded",NO);
-            edit.apply();
-
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (Exception e) {
-                    //log the exception
-
-                    e.printStackTrace();
-                    edit.putString("fareDetailsLoaded",NO);
-
-
-                }
-            }
-        }
-
-        edit.apply();
-
-    }
-
-
-
-    // Please don't uncomment : Copy Paste as it is across different activities
-
-    // Receive data from shared preference
-
-    /*
-
-        private HashMap<String,Integer> hashMapFare = new HashMap<>();
-        private ArrayList<StationDetails> stationDetailsArrayList = new ArrayList<>();
-        private ArrayList<PlaceDetails> placeDetailsArrayList = new ArrayList<>();
-        private HashMap<String,Integer> nameToIndexStation = new HashMap<>();
-        private ArrayList<NeighbourList> neighbourListArrayList = new ArrayList<>();
-    */
-
-    //
-
-    /*
-    private void LoadDataFromSharedPref(String Opt){
-        SharedPreferences pref = getApplicationContext().
-                getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-
-        Gson gson = new Gson();
-        Type type;
-
-        switch (Opt){
-            case "stationDetails":
-                type =  new TypeToken<ArrayList<StationDetails>>(){}.getType();
-                stationDetailsArrayList = gson.fromJson(
-                        pref.getString("stationDetails",""),
-                        type);
-                break;
-
-            case "placeDetails":
-                type =  new TypeToken<ArrayList<PlaceDetails>>(){}.getType();
-                placeDetailsArrayList = gson.fromJson(
-                        pref.getString("placeDetails",""),type);
-                break;
-
-            case "hashMapFare":
-                type = new TypeToken<HashMap<String,Integer>>(){}.getType();
-                hashMapFare = gson.fromJson(
-                        pref.getString("hashMapFare",""),type);
-                break;
-
-            case "nameToIndexStation":
-                type = new TypeToken<HashMap<String,Integer>>(){}.getType();
-                nameToIndexStation = gson.fromJson(
-                        pref.getString("nameToIndexStation",""),type);
-                break;
-
-            case "neighbourDetails":
-                type = new TypeToken<ArrayList<NeighbourList>>(){}.getType();
-                neighbourListArrayList = gson.fromJson(
-                        pref.getString("neighbourDetails",""),type);
-                break;
-        }
-
-    }
-
-    */
-
-    // end of receive data from shared preference
-
     // setup the next activity details
     private void GoToNextActivity(){
         Intent intent = new Intent(this,MainActivity.class);
@@ -357,75 +265,6 @@ public class SplashScreen extends AppCompatActivity {
         finish();
     }
 
-    // Test the correctness of loaded data manually
-
-    private void ManualTest(long time){
-        String result = "\tLoad Time : "+time+"\n";
-        Log.d(MANUAL_TEST,result);
-    }
-
-    // Load data on different thread to reduce the load on UI or main Thread
-    // Load data from asset folder to Java Class and Java Class to
-    // Shared Preferences using GSON Object implemented via GSON library
-
-
-    private void LoadDataOnDifferentThread(){
-
-
-
-
-
-        new Handler().postDelayed(new Runnable() {
-
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
-
-            @Override
-            public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
-
-
-
-                long t1 = System.currentTimeMillis();
-                LoadDataFromAssets();
-
-                saveDataToSharedPref();
-
-                long t2 = System.currentTimeMillis();
-
-                // testing the loaded data correctness manually
-
-                ManualTest(t2-t1);
-
-               GoToNextActivity();
-
-            }
-        }, SLEEP_TIME);
-
-
-
-
-    }
-
-    // used to create Query string for the hashMapFare of fare data
-
-    private String getFareQuery(String FromStn,String ToStn){
-        return (FromStn.compareTo(ToStn)>0)?
-                ToStn+"->"+FromStn:FromStn+"->"+ToStn;
-    }
-
-    // Load Data from Assets sequentially
-
-    private void LoadDataFromAssets(){
-        LoadStationAssets();
-        LoadPlaceAssets();
-        LoadAdjList();
-        populateNeighbours();
-
-    }
 
     /*
     *
@@ -625,6 +464,166 @@ public class SplashScreen extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+
+    private void readFareFromAsset(Context context){
+
+
+        SharedPreferences pref = getApplicationContext().
+                getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+
+        SharedPreferences.Editor edit = pref.edit();
+
+        BufferedReader reader = null;
+        try {
+            MetroFareDBHandler metroFareDBHandler = new MetroFareDBHandler(context);
+
+            reader = new BufferedReader(
+                    new InputStreamReader(
+                            getAssets().open("fareList.txt")
+                    )
+            );
+
+
+
+
+            // do reading, usually loop until end of file reading
+            String mLine;
+            while ((mLine = reader.readLine()) != null) {
+
+                // process line
+
+
+                String[] row = mLine.split("->");
+
+                String From = row[0];
+                String To = row[1];
+                row[2] = row[2].equals("Null")?"-1":row[2];
+                int fare = Integer.parseInt(row[2]);
+
+                FareMetro fareMetro = new FareMetro(From,To,fare);
+                fareMetroArrayList.add(fareMetro);
+
+
+            }
+
+            metroFareDBHandler.addAll(fareMetroArrayList);
+            edit.putString("fareDetailsLoaded",YES);
+
+        } catch (Exception e) {
+            //log the exception
+
+            edit.clear();
+            e.printStackTrace();
+            edit.apply();
+
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (Exception e) {
+                    //log the exception
+
+                    e.printStackTrace();
+
+
+                }
+            }
+        }
+
+        edit.apply();
+
+    }
+
+
+
+    /*
+    *
+    * Download files from Assets folder in Background
+    * */
+
+    private class DownloadFilesTask extends AsyncTask<URL, Integer, Integer> {
+
+        private long t1,t2;
+
+        private TextView textView;
+
+        private static final String LOAD_COMPLETE = "Loading Complete";
+        private static final String LOAD_FIRST_TIME = "Please wait .. " +
+                "\nResources are loading for the first time";
+
+        DownloadFilesTask(){
+
+
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            this.textView = (TextView)findViewById(R.id.tv2);
+
+            if(isUnLoaded("AllDetailsLoaded")) {
+                this.textView.setText(LOAD_FIRST_TIME);
+            }
+
+            t1 = System.currentTimeMillis();
+
+        }
+
+        protected Integer doInBackground(URL... urls) {
+
+            // code that will run in the background
+
+            if(isUnLoaded("AllDetailsLoaded")){
+
+                // Loading data for first time
+
+                saveDataToSharedPref();
+            }else {
+                try {
+
+                    // Loading data when resources loaded already
+
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return 1;
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+
+            // receive progress updates from doInBackground
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+
+
+            try {
+                   Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }finally {
+
+                t2 = System.currentTimeMillis();
+                Log.d("Loading Time (Res) : ",Long.valueOf(t2-t1).toString());
+
+                // Testing fare DB working ..
+                getFareFromDB(SplashScreen.this,"DHAULA KUAN","DWARKA SEC 21 AIRPORT");
+
+                textView.setText(LOAD_COMPLETE);
+                GoToNextActivity();
+            }
+
+        }
     }
 
 

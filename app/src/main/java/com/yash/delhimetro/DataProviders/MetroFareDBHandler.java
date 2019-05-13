@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class MetroFareDBHandler extends SQLiteOpenHelper {
 
@@ -70,10 +71,30 @@ public class MetroFareDBHandler extends SQLiteOpenHelper {
     }
 
 
+    public void addAll(ArrayList<FareMetro> fareMetroArrayList){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try {
+
+            // add all
+
+            for (FareMetro fm: fareMetroArrayList) {
+                addFareMetro(fm);
+            }
+
+            db.setTransactionSuccessful();
+        } catch(Exception e) {
+            e.printStackTrace();
+            //Error in between database transaction
+        } finally {
+            db.endTransaction();
+        }
+
+    }
 
     // code to add the new Fare Metro
 
-    public void addFareMetro(FareMetro fareMetro) {
+    private void addFareMetro(FareMetro fareMetro) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
