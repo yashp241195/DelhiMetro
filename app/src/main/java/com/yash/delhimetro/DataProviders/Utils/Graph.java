@@ -374,6 +374,8 @@ public class Graph {
 
             rp.setStationList(new ArrayList<String>(path));
             rp.setTimeTaken(timeTaken);
+            rp.setStops(path.size());
+
 
 //            Log.d("path founded : ",rp.toString());
             resultPaths.add(rp);

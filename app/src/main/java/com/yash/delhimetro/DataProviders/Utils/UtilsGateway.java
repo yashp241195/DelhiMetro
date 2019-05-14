@@ -1,7 +1,10 @@
 package com.yash.delhimetro.DataProviders.Utils;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.yash.delhimetro.DataProviders.FareMetro;
+import com.yash.delhimetro.DataProviders.MetroFareDBHandler;
 import com.yash.delhimetro.DataProviders.NeighbourList;
 import com.yash.delhimetro.DataProviders.ResultPath;
 import com.yash.delhimetro.DataProviders.StationDetails;
@@ -18,12 +21,16 @@ public class UtilsGateway {
     private ArrayList<NeighbourList> neighbourListArrayList;
     private ArrayList<String> stationNameList;
 
+    private Context context;
 
-    public UtilsGateway(ArrayList<StationDetails> stationDetailsArrayList,
+    public UtilsGateway(
+            Context context,
+            ArrayList<StationDetails> stationDetailsArrayList,
                         HashMap<String, Integer> nameToIndexStation,
                         ArrayList<NeighbourList> neighbourListArrayList,
                         ArrayList<String> stationNameList){
 
+        this.context = context;
         this.stationDetailsArrayList = stationDetailsArrayList;
         this.nameToIndexStation = nameToIndexStation;
         this.neighbourListArrayList = neighbourListArrayList;
@@ -56,8 +63,41 @@ public class UtilsGateway {
         }
     }
 
+    private int getFareFromDB(Context context, String From, String To){
+
+        MetroFareDBHandler metroFareDBHandler = new MetroFareDBHandler(context);
+
+        FareMetro fm = metroFareDBHandler.getFareMetro(From,To);
+
+        return  (fm == null)?-1:fm.getFare();
+    }
+
     public ArrayList<ResultPath> ComputePaths(String From, String To){
-       return graph.getResults(From,To);
+
+        ArrayList<ResultPath> rpList = new ArrayList<>();
+
+        int fare = getFareFromDB(context,From,To);
+
+        for (ResultPath rp: graph.getResults(From,To)) {
+
+            rp.setFare(fare);
+
+            int countParking = 0;
+
+            for (String stn: rp.getStationList()){
+
+                int idx = nameToIndexStation.get(stn);
+
+                if(stationDetailsArrayList.get(idx).getHasParking())
+                    countParking++;
+            }
+
+            rp.setParkingCount(countParking);
+
+            rpList.add(rp);
+        }
+
+       return rpList;
     }
 
 

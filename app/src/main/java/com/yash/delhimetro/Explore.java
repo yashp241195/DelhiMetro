@@ -2,9 +2,8 @@ package com.yash.delhimetro;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,8 +15,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yash.delhimetro.DataProviders.NeighbourList;
 import com.yash.delhimetro.DataProviders.PlaceDetails;
-import com.yash.delhimetro.DataProviders.StationDetails;
 import com.yash.delhimetro.DataProviders.ResultPath;
+import com.yash.delhimetro.DataProviders.StationDetails;
 import com.yash.delhimetro.DataProviders.Utils.UtilsGateway;
 import com.yash.delhimetro.ViewAdapters.RouteSummaryListAdapter;
 
@@ -60,42 +59,41 @@ public class Explore extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
 
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
 
 
-                receiveData();
-                receiveDataFromIntent();
-                LoadWidgets();
+        receiveData();
+        receiveDataFromIntent();
+        LoadWidgets();
 
 
-                utilsGateway
-                        = new UtilsGateway(
-                        stationDetailsArrayList,
-                        nameToIndexStation,
-                        neighbourListArrayList,
-                        stationNameArrayList
-                );
+        utilsGateway
+                = new UtilsGateway(
+                        this,
+                stationDetailsArrayList,
+                nameToIndexStation,
+                neighbourListArrayList,
+                stationNameArrayList
+        );
 
-                /*
-                Log.d("stationDetail : ", stationDetailsArrayList.toString());
-                Log.d("stationNameHash : ", nameToIndexStation.toString());
-                Log.d("neighbourList : ", neighbourListArrayList.toString());
-                Log.d("stationName : ", stationNameArrayList.toString());
-                */
+        /*
+        Log.d("stationDetail : ", stationDetailsArrayList.toString());
+        Log.d("stationNameHash : ", nameToIndexStation.toString());
+        Log.d("neighbourList : ", neighbourListArrayList.toString());
+        Log.d("stationName : ", stationNameArrayList.toString());
+        */
 
-                if (optId == R.id.optToStation || optId == R.id.optToPlace) {
-                    resultPaths = utilsGateway.ComputePaths(FromStation, ToStation);
+        if (optId == R.id.optToStation || optId == R.id.optToPlace) {
+            resultPaths = utilsGateway.ComputePaths(FromStation, ToStation);
 
-                    Log.d("Transit",FromStation+"->"+ToStation);
-                    Log.d("Result Paths : ",resultPaths.toString());
+            Log.d("Transit",FromStation+"->"+ToStation);
+            Log.d("Result Paths : ",resultPaths.toString());
 
-                    routeSummaryListAdapter = new RouteSummaryListAdapter(
-                            resultPaths,
-                            stationDetailsArrayList,
-                            nameToIndexStation
+            routeSummaryListAdapter = new RouteSummaryListAdapter(this,
+                    resultPaths,
+                    stationDetailsArrayList,
+                    nameToIndexStation
 
-                    );
+            );
 
 
 
@@ -118,21 +116,20 @@ public class Explore extends AppCompatActivity {
 
 
 
-                }
+        }
 
-                if (optId == R.id.optToToilet) {
+        if (optId == R.id.optToToilet) {
 
-                    NearbyToiletStations = utilsGateway.FindNearby(
-                            FromStation, "hasToilet");
-                }
+            NearbyToiletStations = utilsGateway.FindNearby(
+                    FromStation, "hasToilet");
+        }
 
-                if (optId == R.id.optToParking) {
+        if (optId == R.id.optToParking) {
 
-                    NearbyParkingStations = utilsGateway.FindNearby(
-                            FromStation, "hasParking");
-                }
-            }
-        }, 50);
+            NearbyParkingStations = utilsGateway.FindNearby(
+                    FromStation, "hasParking");
+        }
+
 
 
     }

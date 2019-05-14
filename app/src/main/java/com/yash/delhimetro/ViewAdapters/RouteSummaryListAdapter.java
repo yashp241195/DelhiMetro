@@ -1,5 +1,6 @@
 package com.yash.delhimetro.ViewAdapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -18,6 +20,8 @@ import com.yash.delhimetro.ExploreRoutes;
 import com.yash.delhimetro.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryListAdapter.MyViewHolder> {
@@ -28,19 +32,34 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
     private Context context;
 
     public RouteSummaryListAdapter(
+            Context context,
             ArrayList<ResultPath> resultPathsArrayList,
             ArrayList<StationDetails> stationDetailsArrayList,
             HashMap<String,Integer> nameToIndexStation
 
     ) {
+        this.context = context;
         this.resultPathsArrayList = resultPathsArrayList;
         this.stationDetailsArrayList = stationDetailsArrayList;
         this.nameToIndexStation = nameToIndexStation;
+
+        sortBySwitchCount();
+
+    }
+
+
+    private void sortBySwitchCount(){
+        Collections.sort(resultPathsArrayList, new Comparator<ResultPath>() {
+            @Override
+            public int compare(ResultPath lhs, ResultPath rhs) {
+                return lhs.getSwitchCount().compareTo(rhs.getSwitchCount());
+            }
+        });
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView fareTv,timeTv,stopTv,interchangeTv,mallTv;
+        TextView fareTv,timeTv,stopTv,interchangeTv, parkingTv;
         RecyclerView recyclerViewPathSummary;
 
         MyViewHolder(View view) {
@@ -51,7 +70,7 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
             timeTv = (TextView) view.findViewById(R.id.row_path_summary_time_tv);
             stopTv = (TextView) view.findViewById(R.id.row_path_summary_stops_tv);
             interchangeTv = (TextView) view.findViewById(R.id.row_path_summary_interchange_tv);
-            mallTv = (TextView) view.findViewById(R.id.row_path_summary_mall_tv);
+            parkingTv = (TextView) view.findViewById(R.id.row_path_summary_mall_tv);
             recyclerViewPathSummary = (RecyclerView)view.findViewById(R.id.row_path_summary_explore_path_listView);
 
             view.setOnClickListener(this);
@@ -75,14 +94,12 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
                         false
                 );
 
-        context = viewGroup.getContext();
-
 
         return new MyViewHolder(itemView);
     }
 
     private void onClickAction(View v, int i){
-        Context context = v.getContext();
+
         Intent intent = new Intent(context, ExploreRoutes.class);
 
         ResultPath resultPath = resultPathsArrayList.get(i);
@@ -93,16 +110,17 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
         context.startActivity(intent);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
 
         ResultPath resultPath = resultPathsArrayList.get(i);
 
-        String fareText = "Fare \nRs "+resultPath.getFare();
-        String timeText = "Time \n"+resultPath.getTimeTaken()+" min";
-        String stopsText = "Stops \n"+resultPath.getStops();
-        String mallText = "Nearby Mall\n"+resultPath.getMallCount();
-        String switchText = "Interchange\n"+resultPath.getSwitchCount();
+        String fareText = "Fare \nRs " + resultPath.getFare();
+        String timeText = "Time \n" + resultPath.getTimeTaken() + " min";
+        String stopsText = "Stops \n" + resultPath.getStops();
+        String parkingText = "Parking \n" + resultPath.getParkingCount();
+        String switchText = "Interchange\n" + resultPath.getSwitchCount();
 
         ArrayList<String> pathSummary = resultPath.getSummaryList();
 
@@ -110,11 +128,11 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
         myViewHolder.timeTv.setText(timeText);
         myViewHolder.stopTv.setText(stopsText);
         myViewHolder.interchangeTv.setText(switchText);
-        myViewHolder.mallTv.setText(mallText);
+        myViewHolder.parkingTv.setText(parkingText);
 
         ArrayList<StationDetails> pathSummaryStationList = new ArrayList<>();
 
-        for (String StnName: pathSummary) {
+        for (String StnName : pathSummary) {
 
             int idx = nameToIndexStation.get(StnName);
             StationDetails stationDetails = stationDetailsArrayList.get(idx);
@@ -123,25 +141,7 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
 
         }
 
-        Log.d("path : ",pathSummaryStationList.toString());
-
-
-        myViewHolder.recyclerViewPathSummary.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean b) {
-
-            }
-        });
+        Log.d("path : ", pathSummaryStationList.toString());
 
 
         myViewHolder.recyclerViewPathSummary.setItemViewCacheSize(20);
@@ -154,8 +154,41 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
         myViewHolder.recyclerViewPathSummary.setAdapter(stationListAdapter);
 
 
-    }
+        myViewHolder.recyclerViewPathSummary.setOnTouchListener(
+                new View.OnTouchListener() {
 
+            private long startClickTime;
+
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        Log.d("click", "true");
+
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                            startClickTime = System.currentTimeMillis();
+
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                            if (System.currentTimeMillis() - startClickTime < ViewConfiguration.getTapTimeout()) {
+
+                                // Touch was a simple tap. Do whatever.
+
+                            } else {
+
+                                myViewHolder.onClick(v);
+                                // Touch was a not a simple tap.
+
+                            }
+
+                        }
+
+                        return true;
+                    }
+                }
+
+        );
+    }
 
 
     @Override

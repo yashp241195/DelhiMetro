@@ -83,7 +83,7 @@
             app:layout_constraintBottom_toTopOf="@+id/row_path_summary_mall_tv"
             app:layout_constraintStart_toEndOf="@+id/row_path_summary_switch_icon"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/rcv_ic_mall"
+            app:srcCompat="@drawable/rcv_ic_parking"
             tools:ignore="VectorDrawableCompat" />
 
         <TextView
@@ -144,7 +144,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Nearby Malls\n10"
+            android:text="Nearby Parking\n10"
             android:textAlignment="center"
             android:textColor="@color/design_default_color_primary_dark"
             android:textSize="12sp"

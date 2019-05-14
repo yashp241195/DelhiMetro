@@ -540,8 +540,8 @@ public class MainActivity extends AppCompatActivity
                 acTvTo.setText("");
 
 
-                Log.d("stnList",stationNameArrayList.toString());
-                Log.d("size",Integer.valueOf(stationNameArrayList.size()).toString());
+//                Log.d("stnList",stationNameArrayList.toString());
+//                Log.d("size",Integer.valueOf(stationNameArrayList.size()).toString());
 
             }
 

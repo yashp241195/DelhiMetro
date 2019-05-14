@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ResultPath implements Comparable<ResultPath>{
 
-    private Integer timeTaken, SwitchCount = 0, fare = 0, stops = 0, mallCount = 0;
+    private Integer timeTaken, SwitchCount = 0, fare = 0, stops = 0, parkingCount = 0;
     private ArrayList<String> StationList, SummaryList;
 
 
@@ -99,11 +99,11 @@ public class ResultPath implements Comparable<ResultPath>{
         this.stops = stops;
     }
 
-    public Integer getMallCount() {
-        return mallCount;
+    public Integer getParkingCount() {
+        return parkingCount;
     }
 
-    public void setMallCount(Integer mallCount) {
-        this.mallCount = mallCount;
+    public void setParkingCount(Integer parkingCount) {
+        this.parkingCount = parkingCount;
     }
 }
