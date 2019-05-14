@@ -22,6 +22,8 @@ import com.yash.delhimetro.ViewAdapters.RouteSummaryListAdapter;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Explore extends AppCompatActivity {
@@ -59,8 +61,6 @@ public class Explore extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
 
-
-
         receiveData();
         receiveDataFromIntent();
         LoadWidgets();
@@ -83,52 +83,165 @@ public class Explore extends AppCompatActivity {
         */
 
         if (optId == R.id.optToStation || optId == R.id.optToPlace) {
+
             resultPaths = utilsGateway.ComputePaths(FromStation, ToStation);
-
-            Log.d("Transit",FromStation+"->"+ToStation);
-            Log.d("Result Paths : ",resultPaths.toString());
-
-            routeSummaryListAdapter = new RouteSummaryListAdapter(this,
-                    resultPaths,
-                    stationDetailsArrayList,
-                    nameToIndexStation
-
-            );
-
-
-
-                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.RouteSummaryListView);
-
-
-                    recyclerView.addItemDecoration(new DividerItemDecoration(
-                            getApplicationContext(),
-                            DividerItemDecoration.VERTICAL));
-
-
-                    recyclerView.setItemViewCacheSize(20);
-                    recyclerView.setDrawingCacheEnabled(true);
-
-                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                    recyclerView.setLayoutManager(mLayoutManager);
-
-
-                    recyclerView.setAdapter(routeSummaryListAdapter);
-
-
 
         }
 
+
+        TextView FromStationTv = (TextView)findViewById(R.id.actE_valFromStation);
+        TextView ToStationTv = (TextView)findViewById(R.id.actE_valToStation);
+        TextView ToPlaceTv = (TextView)findViewById(R.id.actE_valToPlace);
+        TextView ToPlaceLabelTv = (TextView)findViewById(R.id.actE_labelToPlace);
+        TextView ToStationLabelTv = (TextView)findViewById(R.id.actE_labelToStation);
+
+
+
         if (optId == R.id.optToToilet) {
 
-            NearbyToiletStations = utilsGateway.FindNearby(
-                    FromStation, "hasToilet");
+            int idx = nameToIndexStation.get(FromStation);
+
+            if(stationDetailsArrayList.get(idx).getHasToilet()){
+                ToStationTv.setText(FromStation);
+                ToPlaceLabelTv.setText("Toilet Nearby");
+                ToPlaceTv.setText("Toilet already present at Station");
+
+                resultPaths = utilsGateway.ComputePaths(FromStation, FromStation);
+            }else {
+
+                NearbyToiletStations = utilsGateway.FindNearby(
+                        FromStation, "hasToilet");
+
+                StringBuilder text = new StringBuilder();
+
+
+                int j = 0;
+
+                for (String to:NearbyToiletStations){
+
+                    text.append(to);
+                    if(j < NearbyToiletStations.size()-1)
+                        text.append(", ");
+                    else
+                        text.append(" ");
+
+                    j++;
+
+
+
+                    ArrayList<ResultPath> tempRP = utilsGateway.ComputePaths(FromStation,to);
+
+                    Collections.sort(tempRP, new Comparator<ResultPath>() {
+                        @Override
+                        public int compare(ResultPath lhs, ResultPath rhs) {
+                            return lhs.getSwitchCount().compareTo(rhs.getSwitchCount());
+                        }
+                    });
+
+                    resultPaths.add(tempRP.get(0));
+                }
+
+                text.append(" are the nearest stations with toilets ");
+
+
+                ToStationTv.setText(text);
+
+                ToPlaceLabelTv.setVisibility(View.GONE);
+                ToPlaceTv.setVisibility(View.GONE);
+
+
+                Log.d("ToiletNearby",NearbyToiletStations.toString());
+            }
+
+
         }
 
         if (optId == R.id.optToParking) {
 
-            NearbyParkingStations = utilsGateway.FindNearby(
-                    FromStation, "hasParking");
+            int idx = nameToIndexStation.get(FromStation);
+
+            if(stationDetailsArrayList.get(idx).getHasParking()){
+                ToStationTv.setText(FromStation);
+                ToPlaceLabelTv.setText("Parking Nearby");
+                ToPlaceTv.setText("Parking already present at Station");
+                resultPaths = utilsGateway.ComputePaths(FromStation, FromStation);
+
+            }else {
+
+                NearbyParkingStations = utilsGateway.FindNearby(
+                        FromStation, "hasParking");
+
+
+                StringBuilder text = new StringBuilder();
+
+
+                int j = 0;
+
+
+                for (String to:NearbyParkingStations){
+
+                    text.append(to);
+                    if(j < NearbyParkingStations.size()-1)
+                        text.append(", ");
+                    else
+                        text.append(" ");
+
+                    j++;
+
+                    ArrayList<ResultPath> tempRP = utilsGateway.ComputePaths(FromStation,to);
+
+                    Collections.sort(tempRP, new Comparator<ResultPath>() {
+                        @Override
+                        public int compare(ResultPath lhs, ResultPath rhs) {
+                            return lhs.getSwitchCount().compareTo(rhs.getSwitchCount());
+                        }
+                    });
+
+                    resultPaths.add(tempRP.get(0));
+                }
+
+                text.append(" are the nearest stations with parking ");
+
+                ToStationTv.setText(text.toString());
+
+                ToPlaceLabelTv.setVisibility(View.GONE);
+                ToPlaceTv.setVisibility(View.GONE);
+
+                Log.d("ParkingNearby",NearbyToiletStations.toString());
+
+            }
         }
+
+
+        Log.d("Transit",FromStation+"->"+ToStation);
+        Log.d("Result Paths : ",resultPaths.toString());
+
+        routeSummaryListAdapter = new RouteSummaryListAdapter(this,
+                resultPaths,
+                stationDetailsArrayList,
+                nameToIndexStation
+
+        );
+
+
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.RouteSummaryListView);
+
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(
+                getApplicationContext(),
+                DividerItemDecoration.VERTICAL));
+
+
+        recyclerView.setItemViewCacheSize(20);
+        recyclerView.setDrawingCacheEnabled(true);
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+
+
+        recyclerView.setAdapter(routeSummaryListAdapter);
+
 
 
 
@@ -209,18 +322,18 @@ public class Explore extends AppCompatActivity {
             case R.id.optToPlace:
                 break;
             case R.id.optToParking:
-                ToPlaceLabelTv.setVisibility(View.GONE);
-                ToPlaceTv.setVisibility(View.GONE);
+//                ToPlaceLabelTv.setVisibility(View.GONE);
+//                ToPlaceTv.setVisibility(View.GONE);
 
-                ToStationLabelTv.setVisibility(View.GONE);
-                ToStationTv.setVisibility(View.GONE);
+//                ToStationLabelTv.setVisibility(View.GONE);
+//                ToStationTv.setVisibility(View.GONE);
                 break;
             case R.id.optToToilet:
-                ToPlaceLabelTv.setVisibility(View.GONE);
-                ToPlaceTv.setVisibility(View.GONE);
+//                ToPlaceLabelTv.setVisibility(View.GONE);
+//                ToPlaceTv.setVisibility(View.GONE);
 
-                ToStationLabelTv.setVisibility(View.GONE);
-                ToStationTv.setVisibility(View.GONE);
+//                ToStationLabelTv.setVisibility(View.GONE);
+//                ToStationTv.setVisibility(View.GONE);
                 break;
         }
 

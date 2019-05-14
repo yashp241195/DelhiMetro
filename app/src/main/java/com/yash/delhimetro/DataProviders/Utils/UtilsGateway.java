@@ -119,7 +119,7 @@ public class UtilsGateway {
             int idx = nameToIndexStation.get(name);
 
 
-            if(count > 3)
+            if(count > 2)
                 break;
 
 
