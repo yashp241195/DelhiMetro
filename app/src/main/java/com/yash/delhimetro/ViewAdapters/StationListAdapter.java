@@ -160,8 +160,8 @@ public class StationListAdapter extends
 
         // Initialize a new Bitmap object
         Bitmap bitmap = Bitmap.createBitmap(
-                80, // Width
-                30, // Height
+                150, // Width
+                50, // Height
                 Bitmap.Config.ARGB_8888 // Config
         );
 
@@ -178,7 +178,7 @@ public class StationListAdapter extends
         LineColor.put("rapid",Color.parseColor("#20B2AA"));
         LineColor.put("aqua",Color.parseColor("#00FFFF"));
 
-        int x = 15;
+        int x = 20;
 
         for (int i = 0; i < 4; i++) {
 
@@ -191,7 +191,7 @@ public class StationListAdapter extends
                     LineColor.get(line):Color.TRANSPARENT;
 
             drawCircle(canvas,color,x);
-            x += 17;
+            x += 30;
 
         }
 
@@ -213,7 +213,7 @@ public class StationListAdapter extends
         // Set a pixels value to padding around the circle
         int padding = 2;
         int y = canvas.getHeight() / 2;
-        int radius = 6;
+        int radius = 12;
 
         // Finally, draw the circle on the canvas
         canvas.drawCircle(

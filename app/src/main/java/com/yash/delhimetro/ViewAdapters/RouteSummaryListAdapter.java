@@ -173,10 +173,11 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
                             if (System.currentTimeMillis() - startClickTime < ViewConfiguration.getTapTimeout()) {
 
                                 // Touch was a simple tap. Do whatever.
+                                myViewHolder.onClick(v);
 
                             } else {
 
-                                myViewHolder.onClick(v);
+
                                 // Touch was a not a simple tap.
 
                             }
