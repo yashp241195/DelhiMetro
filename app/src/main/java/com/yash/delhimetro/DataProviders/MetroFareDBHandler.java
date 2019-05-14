@@ -90,6 +90,7 @@ public class MetroFareDBHandler extends SQLiteOpenHelper {
             db.endTransaction();
         }
 
+        db.close();
     }
 
     // code to add the new Fare Metro
@@ -113,7 +114,6 @@ public class MetroFareDBHandler extends SQLiteOpenHelper {
         // Inserting Row
         db.insert(TABLE_FARE, null, values);
         //2nd argument is String containing nullColumnHack
-        //        db.close();
     }
 
 
@@ -143,6 +143,8 @@ public class MetroFareDBHandler extends SQLiteOpenHelper {
                 cursor.getString(1),
                 Integer.parseInt(cursor.getString(2))
         );
+
+        db.close();
         return fareMetro;
 
     }

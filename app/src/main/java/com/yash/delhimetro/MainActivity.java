@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -56,13 +55,11 @@ public class MainActivity extends AppCompatActivity
     private HashMap<String,String> placeNearbyMetro = new HashMap<>();
 
     private ArrayList<String> stationNameArrayList = new ArrayList<>();
-    private ArrayList<String> all_stationNameArrayList = new ArrayList<>();
 
     private ArrayList<String> all_except_airport_stationNameArrayList = new ArrayList<>();
 
 
     private ArrayList<String> placeNameArrayList = new ArrayList<>();
-    private ArrayList<String> all_placeNameArrayList = new ArrayList<>();
 
     private ArrayList<String> airport_placeNameArrayList = new ArrayList<>();
     private ArrayList<String> all_except_airport_placeNameArrayList =
@@ -107,17 +104,9 @@ public class MainActivity extends AppCompatActivity
 
         submit = (Button)findViewById(R.id.actM_searchRoutes);
 
-
-
-
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                LoadData();
-                LoadWidgets();
-                OnSubmitSearchRoute();
-
-            }
-        }, 20);
+        LoadData();
+        LoadWidgets();
+        OnSubmitSearchRoute();
 
 
 
@@ -382,7 +371,6 @@ public class MainActivity extends AppCompatActivity
             }else{
                 all_except_airport_stationNameArrayList.add(stationDetails.getStationName());
             }
-            all_stationNameArrayList.add(stationDetails.getStationName());
 
 
         }
@@ -404,7 +392,6 @@ public class MainActivity extends AppCompatActivity
                 all_except_airport_placeNameArrayList.add(placeDetails.getPlaceName());
             }
 
-            all_placeNameArrayList.add(placeDetails.getPlaceName());
         }
 
         placeNameArrayList.addAll(all_except_airport_placeNameArrayList);
@@ -424,6 +411,8 @@ public class MainActivity extends AppCompatActivity
                 stationDetailsArrayList = gson.fromJson(
                         pref.getString("stationDetails",""),
                         type);
+
+
                 break;
 
             case "placeDetails":
@@ -472,10 +461,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+
                 stationNameArrayList = new ArrayList<>();
                 placeNameArrayList = new ArrayList<>();
 
+
                 String opt  = optionMenu.get(position);
+
+
 
                 switch (opt){
                     case "Metro":
@@ -506,15 +499,18 @@ public class MainActivity extends AppCompatActivity
                             getSupportActionBar().setBackgroundDrawable(
                                     new ColorDrawable(orangeColor));
                             fab.setBackgroundTintList(ColorStateList.valueOf(orangeColor));
+                            submit.setBackgroundColor(orangeColor);
+
 
                         }catch (Exception e){
                             e.printStackTrace();
                         }
-                        submit.setBackgroundColor(orangeColor);
-
 
                         stationNameArrayList.addAll(airport_stationNameArrayList);
                         placeNameArrayList.addAll(airport_placeNameArrayList);
+
+
+
 
                         break;
                 }

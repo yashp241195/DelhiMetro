@@ -147,102 +147,33 @@ public class SplashScreen extends AppCompatActivity {
     }
 
 
-    private void saveDataToSharedPref(){
+    private synchronized void  saveDataToSharedPref(){
 
         SharedPreferences pref = getApplicationContext().
                 getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        Gson gson = new Gson();
 
-        int count = 0;
 
-        // Saving data to shared preference
-
-        // don't mess with the order of loading the data
 
         if(isUnLoaded("stationDetailsLoaded")) {
 
             LoadStationAssets();
-
-            editor.putString("stationDetails", gson.toJson(stationDetailsArrayList));
-            editor.putString("stationDetailsLoaded", YES);
-
-            count++;
-            Log.d("Loading status : ","stationDetailsLoaded YES");
-        }
-        else{
-            Log.d("Loading status : ","stationDetailsLoaded YES already");
-        }
-
-
-
-
-        if(isUnLoaded("placeDetailsLoaded")) {
-
             LoadPlaceAssets();
-
-            editor.putString("placeDetails",gson.toJson(placeDetailsArrayList));
-            editor.putString("placeDetailsLoaded", YES);
-
-            count++;
-            Log.d("Loading status : ","placeDetailsLoaded YES");
-
-        }
-        else{
-            Log.d("Loading status : ","placeDetailsLoaded YES already");
-        }
-
-
-        if(isUnLoaded("nameToIndexStationLoaded")) {
-
-            editor.putString("nameToIndexStation",
-                    gson.toJson(nameToIndexStation));
-
-            editor.putString("nameToIndexStationLoaded", YES);
-            count++;
-            Log.d("Loading status : ","nameToIndexStationLoaded YES");
-
-        }
-        else{
-            Log.d("Loading status : ","nameToIndexStationLoaded YES already");
-        }
-
-
-        if(isUnLoaded("neighbourDetailsLoaded")) {
-
             LoadAdjList();
             populateNeighbours();
-
-
-            editor.putString("neighbourDetails",
-                    gson.toJson(neighbourListArrayList));
-
-
-
-            editor.putString("neighbourDetailsLoaded", YES);
-            count++;
-            Log.d("Loading status : ","neighbourDetailsLoaded YES");
-
-        }else{
-            Log.d("Loading status : ","neighbourDetailsLoaded YES already");
-        }
-
-
-        if(isUnLoaded("fareDetailsLoaded")){
-
-
             readFareFromAsset(this);
 
-            editor.putString("fareDetailsLoaded", YES);
-            count++;
-            Log.d("Loading status : ","fareDetailsLoaded YES");
+            Gson gson = new Gson();
 
-        }else{
-            Log.d("Loading status : ","fareDetailsLoaded YES already");
+            editor.putString("stationDetails", gson.toJson(stationDetailsArrayList));
+            editor.putString("placeDetails",gson.toJson(placeDetailsArrayList));
+            editor.putString("nameToIndexStation", gson.toJson(nameToIndexStation));
+            editor.putString("neighbourDetails", gson.toJson(neighbourListArrayList));
+            editor.putString("neighbourDetails", gson.toJson(neighbourListArrayList));
+
+            editor.putString("AllDetailsLoaded", YES);
+
         }
-
-
-        editor.putString("AllDetailsLoaded", (count == 5)?YES:NO);
 
         editor.apply();
 
@@ -551,13 +482,8 @@ public class SplashScreen extends AppCompatActivity {
 
         private static final String LOAD_COMPLETE = "Loading Complete";
         private static final String LOAD_FIRST_TIME = "Please wait .. " +
-                "\nResources are loading for the first time";
+                "\ninitializing resources for the first time";
 
-        DownloadFilesTask(){
-
-
-
-        }
 
         @Override
         protected void onPreExecute() {
@@ -605,6 +531,13 @@ public class SplashScreen extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer integer) {
+            t2 = System.currentTimeMillis();
+            Log.d("Loading Time (Res) : ",Long.valueOf(t2-t1).toString());
+
+            // Testing fare DB working ..
+            getFareFromDB(SplashScreen.this,"DHAULA KUAN","DWARKA SEC 21 AIRPORT");
+
+            textView.setText(LOAD_COMPLETE);
 
 
             try {
@@ -613,13 +546,7 @@ public class SplashScreen extends AppCompatActivity {
                 e.printStackTrace();
             }finally {
 
-                t2 = System.currentTimeMillis();
-                Log.d("Loading Time (Res) : ",Long.valueOf(t2-t1).toString());
 
-                // Testing fare DB working ..
-                getFareFromDB(SplashScreen.this,"DHAULA KUAN","DWARKA SEC 21 AIRPORT");
-
-                textView.setText(LOAD_COMPLETE);
                 GoToNextActivity();
             }
 
