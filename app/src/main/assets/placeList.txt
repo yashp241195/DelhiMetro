@@ -1,5 +1,71 @@
-placeName->NearbyStation->Distance->placeType->placeImage
+placeName->NearbyStation->Distance->placeType->placeImage.png
 PACIFIC MALL->VAISHALI->1.5 km->MALL->pacific_mall.jpg
-SHOPPRIX MALL->VAISHALI->2 km->MALL->shopprix_mall
-ANSAL PLAZA->VAISHALI->0.7 KM->MALL->ansal_plaza
-EMPORIO MALL->DELHI AERO CITY->3.1 KM->MALL->emporio_mall
+SHOPPRIX MALL->VAISHALI->2 km->MALL->shopprix_mall.png
+ANSAL PLAZA->VAISHALI->0.7 km->MALL->ansal_plaza.png
+EMPORIO MALL->DELHI AERO CITY->3.1 km->MALL->emporio_mall.png
+AKSHARDHAM TEMPLE->AKSHARDHAM->0.3 km->WORSHIP->akshardham.png
+EAST DELHI MALL->ANAND VIHAR->0.2 km->MALL->edm_mall.png
+SANSKRITI KENDRA TERRACOTTA AND METAL MUSEUM->ARJANGARH->0.08 km->MUSEUM->sanskriti_kendra_terracotta.png
+INDIA GATE AND RAJPATH->CENTRAL SECRETARIAT->1.2 km->MONUMENT->india_gate.png
+NATIONAL GANDHI MUSEUM->CENTRAL SECRETARIAT->0.7 km->MUSEUM->national_gandhi_museum.png
+RED FORT->LAL QUILA->0.05 km->MONUMENT->red_fort.png
+JAMA MASJID->JAMA MASJID->0.05 km->WORSHIP->jama_masjid.png
+RAJ GHAT->CHAWRI BAZAR->2 km->MONUMENT->raj_ghat.png
+CHANDINI CHOWK MARKET->CHANDNI CHOWK->0.01 km->MARKET->chandini_chowk.png
+VASANT SQUARE MALL->CHHATTARPUR->2.6 km->MALL->vasant_square.png
+NATIONAL RAIL MUSEUM->LOK KALYAN MARG->4 km->MUSEUM->national_rail_museum.png
+GHALIB ACADEMY->GREEN PARK->0.75 km->MUSEUM->ghalib_museum.png
+AMBIENCE MALL->GURU DRONACHARYA->2.6 km->MALL->ambience_mall.png
+MGF MEGA CITY MALL->GURU DRONACHARYA->1 km->MALL->mgf_mega_city.png
+NATIONAL SCIENCE CENTRE->INDRAPRASTHA->0.8 km->MUSEUM->national_science_center.png
+HUMAYUN S TOMB->JLN STADIUM->1.5 km->MONUMENT->humayun_tomb.png
+TUGHLAKABAD FORT->TUGHLAKABAD->5 km->MONUMENT->tughlakabad_fort.png
+TIBET HOUSE->JLN STADIUM->0.5 km->MUSEUM->tibet_house.png
+LODHI GARDENS->JORBAGH->0.8 km->MONUMENT->lodhi_garden.png
+KALKAJI MANDIR->KALKAJI MANDIR->0.2 km->WORSHIP->kalkaji_mandir.png
+LOTUS TEMPLE->KALKAJI MANDIR->1 km->WORSHIP->lotus_temple.png
+CROSS RIVER MALL->KARKAR DUMA->1 km->MALL->cross_river_mall.png
+SAFDARJUNG TOMB->JORBAGH->0.8 km->MONUMENT->safdurjung_tomb.png
+THE NATIONAL GALLERY OF MODERN ART->KHAN MARKET->1.2 km->MUSEUM->national_gallary_of_modern_art.png
+ISKCON->LAJPAT NAGAR->1.4 km->WORSHIP->iskon.png
+SELECT CITYWALK->MALVIYA NAGAR->1.2 km->MALL->select_city_mall.png
+NATIONAL CHILDREN S MUSEUM OF DELHI->MANDI HOUSE->1 km->MUSEUM->children_museum.png
+SANGEET NATAK AKADEMI->MANDI HOUSE->0.3 km->MUSEUM->sangeet_natak_academy.png
+DLF CITY CENTRE->M G ROAD->0.04 km->MALL->dlf_city_centre.png
+ZOOLOGICAL PARK->PRAGATI MAIDAN->2 km->ZOO->zoo.png
+NORTH SQUARE MALL->NETAJI SUBHASH PLACE->0.35 km->MALL->north_square_mall.png
+V3S EAST CENTRE MALL->NIRMAN VIHAR->0.5 km->MALL->v3s_east_centre_mall.png
+THE SPICE WORLD MALL->NOIDA CITY CENTRE->2.2 km->MALL->spice_world_mall.png
+THE SAB MALL->NOIDA SEC 18->0.5 km->MALL->sab_mall.png
+THE GREAT INDIA PALACE MALL->NOIDA SEC 18->0.3 km->MALL->gip_mall.png
+THE CENTRE STAGE MALL->NOIDA SEC 18->0.4 km->MALL->centre_stage_mall.png
+CATHEDRAL CHURCH OF REDEMPTION->PATEL CHOWK->0.8 km->WORSHIP->cathedral_church.png
+JANTAR MANTAR->PATEL CHOWK->0.3 km->MONUMENT->jantar_mantar.png
+THE NATIONAL HANDICRAFTS AND HANDLOOMS MUSEUM->PRAGATI MAIDAN->2.2 km->MUSEUM->national_handicrafts.png
+SHANKAR S INTERNATIONAL DOLLS MUSEUM->PRAGATI MAIDAN->1 km->MUSEUM->shankars_doll_museum.png
+QUTUB MINAR->QUTAB MINAR->1.4 km->MONUMENT->qutub_minar.png
+INDIRA GANDHI MEMORIAL->LOK KALYAN MARG->0.7 km->MUSEUM->indira_gandhi_museum.png
+NEHRU MUSEUM AND PLANETARIUM->LOK KALYAN MARG->1.2 km->MUSEUM->nehru_museum.png
+CONNAUGHT PLACE->RAJIV CHOWK->0.09 km->MARKET->connaught_place.png
+AGRASEN KI BAOLI->RAJIV CHOWK->2 km->MONUMENT->agrasen_ki_baoli.png
+TDI MALL->RAJOURI GARDEN->0.36 km->MALL->tdi_mall.png
+CITY SQUARE->RAJOURI GARDEN->0.22 km->MALL->city_square.png
+BIRLA MANDIR->RK ASHRAM MARG->0.7 km->WORSHIP->birla_mandir.png
+WEST GATE MALL->RAMESH NAGAR->0.8 km->MALL->west_gate_mall.png
+METRO WALK MALL->RITHALA->0.6 km->MALL->metro_walk.png
+NATIONAL AGRICULTURAL SCIENCE MUSEUM->SATGURU RAM SINGH MARG->0.2 km->MUSEUM->agriculture_science_museum.png
+GURDWARA BANGLA SAHIB->PATEL CHOWK->0.2 km->WORSHIP->bangla_sahib.png
+DLF MEGA MALL->SIKANDARPUR->0.5 km->MALL->dlf_mega_mall.png
+SAHARA MALL->SIKANDARPUR->0.5 km->MALL->sahara_mall.png
+NATIONAL MUSEUM->UDYOG BHAWAN->0.5 km->MUSEUM->national_museum.png
+CHATTARPUR TEMPLE->CHHATTARPUR->0.8 km->WORSHIP->chhatartpur_mandir.png
+HAUZ KHAS COMPLEX->HAUZ KHAS->2.6 km->MARKET->hauz_khas_complex.png
+WORLDS OF WONDER->NOIDA SEC 18->1.2 km->AMUSEMENT PARK->worlds_of_wonder.png
+ADVENTURE ISLAND->RITHALA->1.2 km->AMUSEMENT PARK->adventure_island.png
+GARDEN OF FIVE SENSES->SAKET->1 km->PARK->garden_of_five_senses.png
+HAZRAT NIZAMUDDIN DARGAH->JLN STADIUM->1.4 km->WORSHIP->hazrat_nizamuddin_dargah.png
+JAMALI KAMALI->QUTAB MINAR->1.2 km->MONUMENT->jamli_kamli.png
+PURANA QILA->PRAGATI MAIDAN->2.2 km->MONUMENT->purana_qila.png
+DELHI HAAT INA->DILLI HAAT - INA->0.25 km->MARKET->delhi_haat_ina.png
+DELHI HAAT JANAKPURI->TILAK NAGAR->1.9 km->MARKET->delhi_haat_janakpuri.png
+DELHI HAAT PITAMPURA->NETAJI SUBHASH PLACE->0.5 km->MARKET->delhi_haat_pitampura.png
