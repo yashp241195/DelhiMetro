@@ -213,7 +213,7 @@ public class StationListAdapter extends
         // Set a pixels value to padding around the circle
         int padding = 2;
         int y = canvas.getHeight() / 2;
-        int radius = 12;
+        int radius = 10;
 
         // Finally, draw the circle on the canvas
         canvas.drawCircle(

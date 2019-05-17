@@ -257,5 +257,7 @@ VISHWAVIDYALAYA->true->true
 VODAPHONE BELVEDERE TOWERS->false->false
 WELCOME->true->true
 YAMUNA BANK->true->true
-NEW DELHI AIRPORT->true->false
-DWARKA SEC 21 AIRPORT->true->true
+NEW DELHI AIRPORT LINE->true->false
+DWARKA SEC 21 AIRPORT LINE->true->true
+SIKANDARPUR RAPID METRO->true->true
+SECTOR - 52 NOIDA AQUA LINE->false->false

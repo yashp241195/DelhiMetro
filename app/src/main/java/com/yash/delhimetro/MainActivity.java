@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -25,8 +26,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,9 +46,11 @@ public class MainActivity extends AppCompatActivity
 
 
     private ArrayList<String> optionMenu = new ArrayList<>(
-            Arrays.asList("Metro","Airport Express")
+            Arrays.asList("Metro (Delhi)","Airport Express"
+                    ,"Noida Aqua Line","Gurgaon Rapid Metro"
+            )
     );
-    private ArrayList<String> airport_stationNameArrayList = new ArrayList<>();
+
 
 
     private Button submit;
@@ -54,15 +59,33 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<PlaceDetails> placeDetailsArrayList;
     private HashMap<String,String> placeNearbyMetro = new HashMap<>();
 
+
     private ArrayList<String> stationNameArrayList = new ArrayList<>();
-
-    private ArrayList<String> all_except_airport_stationNameArrayList = new ArrayList<>();
-
-
     private ArrayList<String> placeNameArrayList = new ArrayList<>();
 
-    private ArrayList<String> airport_placeNameArrayList = new ArrayList<>();
-    private ArrayList<String> all_except_airport_placeNameArrayList =
+
+    private ArrayList<String> airport_stationNameArrayList =
+            new ArrayList<>();
+
+    private ArrayList<String> metro_delhi_stationNameArrayList =
+            new ArrayList<>();
+
+    private ArrayList<String> aqua_stationNameArrayList =
+            new ArrayList<>();
+
+    private ArrayList<String> rapid_stationNameArrayList =
+            new ArrayList<>();
+
+    private ArrayList<String> airport_placeNameArrayList =
+            new ArrayList<>();
+
+    private ArrayList<String> metro_delhi_placeNameArrayList =
+            new ArrayList<>();
+
+    private ArrayList<String> aqua_placeNameArrayList =
+            new ArrayList<>();
+
+    private ArrayList<String> rapid_placeNameArrayList =
             new ArrayList<>();
 
     private static final String MY_PREFS_NAME = "Loaded Data";
@@ -75,6 +98,7 @@ public class MainActivity extends AppCompatActivity
     private String ErrorText = "Error : ";
 
     private FloatingActionButton fab;
+    private int themeColor = Color.RED;
 
 
     @Override
@@ -356,6 +380,24 @@ public class MainActivity extends AppCompatActivity
         return false;
     }
 
+    private boolean belongsToAqua(StationDetails stationDetails){
+        ArrayList<String> line = stationDetails.getLine();
+
+        if(line.size() == 1){
+            return line.get(0).equals("aqua");
+        }
+        return false;
+    }
+
+    private boolean belongsToRapid(StationDetails stationDetails){
+        ArrayList<String> line = stationDetails.getLine();
+
+        if(line.size() == 1){
+            return line.get(0).equals("rapid");
+        }
+        return false;
+    }
+
     // Load data from resources
 
     private void LoadData(){
@@ -368,14 +410,21 @@ public class MainActivity extends AppCompatActivity
         for (StationDetails stationDetails: stationDetailsArrayList){
             if(belongsToAirportLine(stationDetails)){
                 airport_stationNameArrayList.add(stationDetails.getStationName());
-            }else{
-                all_except_airport_stationNameArrayList.add(stationDetails.getStationName());
+            }
+            else if(belongsToAqua(stationDetails)){
+                aqua_stationNameArrayList.add(stationDetails.getStationName());
+            }
+            else if(belongsToRapid(stationDetails)){
+                rapid_stationNameArrayList.add(stationDetails.getStationName());
+            }
+            else{
+                metro_delhi_stationNameArrayList.add(stationDetails.getStationName());
             }
 
 
         }
 
-        stationNameArrayList.addAll(all_except_airport_stationNameArrayList);
+
 
         for (PlaceDetails placeDetails: placeDetailsArrayList){
 
@@ -388,13 +437,24 @@ public class MainActivity extends AppCompatActivity
 
             if(belongsToAirportLine(stationDetailsArrayList.get(nameToIdx))){
                 airport_placeNameArrayList.add(placeDetails.getPlaceName());
-            }else{
-                all_except_airport_placeNameArrayList.add(placeDetails.getPlaceName());
+            }
+            else if(belongsToAqua(stationDetailsArrayList.get(nameToIdx))){
+                aqua_placeNameArrayList.add(placeDetails.getPlaceName());
+            }
+            else if(belongsToRapid(stationDetailsArrayList.get(nameToIdx))){
+                rapid_placeNameArrayList.add(placeDetails.getPlaceName());
+            }
+
+            else{
+                metro_delhi_placeNameArrayList.add(placeDetails.getPlaceName());
             }
 
         }
 
-        placeNameArrayList.addAll(all_except_airport_placeNameArrayList);
+
+        // default
+        stationNameArrayList.addAll(metro_delhi_stationNameArrayList);
+        placeNameArrayList.addAll(metro_delhi_placeNameArrayList);
 
     }
 
@@ -471,48 +531,89 @@ public class MainActivity extends AppCompatActivity
 
 
                 switch (opt){
-                    case "Metro":
-                        try {
-                            getSupportActionBar().setBackgroundDrawable(
-                                    new ColorDrawable(Color.RED));
-                            fab.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+                    case "Metro (Delhi)":
 
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
+                        themeColor = Color.RED;
 
-                        submit.setBackgroundColor(Color.RED);
-
-
-                        stationNameArrayList.addAll(all_except_airport_stationNameArrayList);
-                        placeNameArrayList.addAll(all_except_airport_placeNameArrayList);
-
-
+                        stationNameArrayList.addAll(metro_delhi_stationNameArrayList);
+                        placeNameArrayList.addAll(metro_delhi_placeNameArrayList);
 
                         break;
 
                     case "Airport Express":
 
-                        int orangeColor = Color.parseColor("#FF6600");
-
-                        try {
-                            getSupportActionBar().setBackgroundDrawable(
-                                    new ColorDrawable(orangeColor));
-                            fab.setBackgroundTintList(ColorStateList.valueOf(orangeColor));
-                            submit.setBackgroundColor(orangeColor);
-
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
+                        themeColor = Color.parseColor("#FF6600");
 
                         stationNameArrayList.addAll(airport_stationNameArrayList);
                         placeNameArrayList.addAll(airport_placeNameArrayList);
 
+                        break;
 
 
+                    case "Noida Aqua Line":
+
+
+                        themeColor = Color.parseColor("#20B2AA");
+
+
+                        stationNameArrayList.addAll(aqua_stationNameArrayList);
+                        placeNameArrayList.addAll(aqua_placeNameArrayList);
 
                         break;
+
+                    case "Gurgaon Rapid Metro":
+
+                        themeColor = Color.parseColor("#1B4F72");
+
+                        stationNameArrayList.addAll(rapid_stationNameArrayList);
+                        placeNameArrayList.addAll(rapid_placeNameArrayList);
+
+                        break;
+                }
+
+
+                try {
+                    getSupportActionBar().setBackgroundDrawable(
+                            new ColorDrawable(themeColor));
+
+                    fab.setBackgroundTintList(ColorStateList.valueOf(themeColor));
+                    submit.setBackgroundColor(themeColor);
+
+                    TextView textViewFrom = (TextView)findViewById(R.id.actM_labelFrom);
+                    textViewFrom.setTextColor(themeColor);
+
+                    TextView textViewTo =(TextView)findViewById(R.id.actM_labelTo);
+                    textViewTo.setTextColor(themeColor);
+
+
+                    int size = OptRadioGroup.getChildCount();
+
+                    if(Build.VERSION.SDK_INT>=21) {
+
+                        ColorStateList colorStateList = new ColorStateList(
+                                new int[][]{
+
+                                        new int[]{-android.R.attr.state_enabled}, //disabled
+                                        new int[]{android.R.attr.state_enabled} //enabled
+                                },
+                                new int[] {
+
+                                        Color.BLACK //disabled
+                                        ,themeColor //enabled
+
+                                }
+                        );
+
+                        for (int i = 0; i < size; i++) {
+
+                            RadioButton rb = (RadioButton) OptRadioGroup.getChildAt(i);
+                            rb.setButtonTintList(colorStateList);
+
+                        }
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
 
                 // use the base context so that the background dropdown stay same
@@ -541,7 +642,7 @@ public class MainActivity extends AppCompatActivity
 
 
 //                Log.d("stnList",stationNameArrayList.toString());
-//                Log.d("size",Integer.valueOf(stationNameArrayList.size()).toString());
+                Log.d("size",Integer.valueOf(stationNameArrayList.size()).toString());
 
             }
 

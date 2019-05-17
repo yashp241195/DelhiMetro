@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
@@ -35,21 +34,9 @@ public class WebQuery extends AppCompatActivity {
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-
-                setUpUrlHash();
-                SetupWebView();
-
-
-                LoadWidget();
-            }
-        }, 50);
-
-
-
-
-
+        setUpUrlHash();
+        SetupWebView();
+        LoadWidget();
         LoadButtonGroupWidgets();
 
 

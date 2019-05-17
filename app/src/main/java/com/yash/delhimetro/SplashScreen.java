@@ -89,12 +89,23 @@ public class SplashScreen extends AppCompatActivity {
 
         mDemoSlider = (SliderLayout)findViewById(R.id.slider);
 
-
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Hannibal",R.drawable.rcv_ic_clock);
-        file_maps.put("Big Bang Theory",R.drawable.rcv_ic_mall);
-        file_maps.put("House of Cards",R.drawable.rcv_ic_parking);
-        file_maps.put("Game of Thrones", R.drawable.rcv_ic_toilet);
+
+        file_maps.put("Welcome to Delhi Metro",R.mipmap.intro_1);
+        file_maps.put("Stations Platform 1/2",R.mipmap.intro_2);
+        file_maps.put("Stations Platform 2/2",R.mipmap.intro_2of2);
+        file_maps.put("Select the metro network", R.mipmap.intro_3);
+        file_maps.put("Airport Express", R.mipmap.intro_4);
+        file_maps.put("Find all possible routes", R.mipmap.intro_5);
+        file_maps.put("Get the route", R.mipmap.intro_6);
+        file_maps.put("Get nearby places", R.mipmap.intro_2of6);
+        file_maps.put("Explore place on web", R.mipmap.intro_7);
+        file_maps.put("Query using web browser", R.mipmap.intro_8);
+        file_maps.put("Search all available places", R.mipmap.intro_9);
+        file_maps.put("Pinch Zoom the map", R.mipmap.intro_10);
+
+
+
 
         for(String name : file_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(this);
@@ -102,7 +113,7 @@ public class SplashScreen extends AppCompatActivity {
             textSliderView
                     .description(name)
                     .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit);
+                    .setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
 
             mDemoSlider.addSlider(textSliderView);
         }
@@ -110,7 +121,7 @@ public class SplashScreen extends AppCompatActivity {
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(2000);
+        mDemoSlider.setDuration(2500);
 
 
     }
@@ -436,6 +447,8 @@ public class SplashScreen extends AppCompatActivity {
                 FareMetro fareMetro = new FareMetro(From,To,fare);
                 fareMetroArrayList.add(fareMetro);
 
+                Log.d("fare fetch",fareMetro.toString());
+
 
             }
 
@@ -535,7 +548,7 @@ public class SplashScreen extends AppCompatActivity {
             Log.d("Loading Time (Res) : ",Long.valueOf(t2-t1).toString());
 
             // Testing fare DB working ..
-            getFareFromDB(SplashScreen.this,"DHAULA KUAN","DWARKA SEC 21 AIRPORT");
+            getFareFromDB(SplashScreen.this,"DHAULA KUAN","DWARKA SEC 21 AIRPORT LINE");
 
             textView.setText(LOAD_COMPLETE);
 

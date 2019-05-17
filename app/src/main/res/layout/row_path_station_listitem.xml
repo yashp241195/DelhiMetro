@@ -9,176 +9,171 @@
     >
 
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/row_path_summary_stops_icon"
-            android:layout_width="46dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/row_path_summary_stops_tv"
-            app:layout_constraintStart_toEndOf="@+id/row_path_summary_time_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/rcv_ic_traffic_signal"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageView
-            android:id="@+id/row_path_summary_switch_icon"
-            android:layout_width="64dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:padding="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/row_path_summary_interchange_tv"
-            app:layout_constraintStart_toEndOf="@+id/row_path_summary_stops_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/rcv_ic_switch"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageView
-            android:id="@+id/row_path_summary_fare_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/row_path_summary_fare_tv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/rcv_ic_rupee"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageView
-            android:id="@+id/row_path_summary_time_icon"
-            android:layout_width="43dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:padding="3dp"
-            app:layout_constraintBottom_toTopOf="@+id/row_path_summary_time_tv"
-            app:layout_constraintStart_toEndOf="@+id/row_path_summary_fare_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/rcv_ic_clock"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageView
-            android:id="@+id/row_path_summary_mall_icon"
-            android:layout_width="72dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:padding="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/row_path_summary_mall_tv"
-            app:layout_constraintStart_toEndOf="@+id/row_path_summary_switch_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/rcv_ic_parking"
-            tools:ignore="VectorDrawableCompat" />
-
-        <TextView
-            android:id="@+id/row_path_summary_time_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="8dp"
-            android:text="Time\n250 min"
-            android:textAlignment="center"
-            android:textColor="@color/design_default_color_primary_dark"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/row_path_summary_fare_tv" />
-
-        <TextView
-            android:id="@+id/row_path_summary_stops_tv"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="8dp"
-            android:text="Stops\n10"
-            android:textAlignment="center"
-            android:textColor="@color/design_default_color_primary_dark"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/row_path_summary_time_tv" />
-
-        <TextView
-            android:id="@+id/row_path_summary_fare_tv"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="7dp"
-            android:text="Fare\nRs 200"
-            android:textAlignment="viewStart"
-            android:textColor="@color/design_default_color_primary_dark"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/row_path_summary_interchange_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="Interchange\n10"
-            android:textAlignment="center"
-            android:textColor="@color/design_default_color_primary_dark"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/row_path_summary_stops_tv" />
-
-        <TextView
-            android:id="@+id/row_path_summary_mall_tv"
-            android:layout_width="72dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Nearby Parking\n10"
-            android:textAlignment="center"
-            android:textColor="@color/design_default_color_primary_dark"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/row_path_summary_interchange_tv" />
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout4"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:weightSum="10"
+
+            >
+
+            <ImageView
+                android:id="@+id/row_path_summary_time_icon"
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:padding="5dp"
+                app:srcCompat="@drawable/rcv_ic_clock" />
+
+            <ImageView
+                android:id="@+id/row_path_summary_fare_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="2"
+                android:padding="5dp"
+
+                app:srcCompat="@drawable/rcv_ic_rupee" />
+
+            <ImageView
+                android:id="@+id/row_path_summary_switch_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="2"
+
+                android:padding="10dp"
+                app:srcCompat="@drawable/rcv_ic_switch" />
+
+            <ImageView
+                android:id="@+id/row_path_summary_stops_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+
+                android:padding="5dp"
+                app:srcCompat="@drawable/rcv_ic_traffic_signal" />
+
+            <ImageView
+                android:id="@+id/row_path_summary_mall_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+
+                android:padding="5dp"
+                app:srcCompat="@drawable/rcv_ic_parking" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/row_path_summary_time_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="2"
+                android:fontFamily="serif"
+                android:text="Time\n250 min"
+                android:textAlignment="center"
+                android:textColor="@color/design_default_color_primary_dark"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/row_path_summary_fare_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="2"
+                android:fontFamily="serif"
+
+                android:text="Fare\nRs 200"
+                android:textAlignment="center"
+                android:textColor="@color/design_default_color_primary_dark"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/row_path_summary_interchange_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="serif"
+                android:text="Interchange\n10"
+                android:textAlignment="center"
+                android:textColor="@color/design_default_color_primary_dark"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/row_path_summary_stops_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="serif"
+                android:text="Stops\n10"
+                android:textAlignment="center"
+                android:textColor="@color/design_default_color_primary_dark"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/row_path_summary_mall_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="serif"
+                android:text="Nearby Parking\n10"
+                android:textAlignment="center"
+                android:textColor="@color/design_default_color_primary_dark"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/row_path_summary_explore_path_listView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:minHeight="100dp"
-            android:paddingStart="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+            android:paddingStart="5dp" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

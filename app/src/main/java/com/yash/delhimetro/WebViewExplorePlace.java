@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
@@ -37,19 +36,16 @@ public class WebViewExplorePlace extends AppCompatActivity {
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
 
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
 
-                receiveData();
-                setUpUrlHash();
-                SetupWebView();
+        receiveData();
+        setUpUrlHash();
+        SetupWebView();
 
-                LoadWidget();
+        LoadWidget();
 
-                LoadButtonGroupUpperWidgets();
-                LoadButtonGroupLowerWidgets();
-            }
-        }, 50);
+        LoadButtonGroupUpperWidgets();
+        LoadButtonGroupLowerWidgets();
+
 
     }
 

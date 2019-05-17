@@ -13,8 +13,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.sql.Time;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -36,12 +34,12 @@ public class MainActivityTest {
         Intents.init();
     }
 
-/*
+
     @Test
     public void TestInputs(){
         TestInputForm();
     }
-*/
+
 
     @Test
     public void TestNavigationView(){
