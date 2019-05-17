@@ -372,30 +372,15 @@ public class MainActivity extends AppCompatActivity
 
 
     private boolean belongsToAirportLine(StationDetails stationDetails){
-        ArrayList<String> line = stationDetails.getLine();
-
-        if(line.size() == 1){
-            return line.get(0).equals("airport");
-        }
-        return false;
+            return stationDetails.getLine().get(0).equals("airport");
     }
 
     private boolean belongsToAqua(StationDetails stationDetails){
-        ArrayList<String> line = stationDetails.getLine();
-
-        if(line.size() == 1){
-            return line.get(0).equals("aqua");
-        }
-        return false;
+            return stationDetails.getLine().get(0).equals("aqua");
     }
 
     private boolean belongsToRapid(StationDetails stationDetails){
-        ArrayList<String> line = stationDetails.getLine();
-
-        if(line.size() == 1){
-            return line.get(0).equals("rapid");
-        }
-        return false;
+            return stationDetails.getLine().get(0).equals("rapid");
     }
 
     // Load data from resources

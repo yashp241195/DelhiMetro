@@ -141,7 +141,7 @@ public class Explore extends AppCompatActivity {
                     resultPaths.add(tempRP.get(0));
                 }
 
-                text.append(" are the nearest stations with toilets ");
+                text.append(" "+((j>1)?"are":"is")+" the nearest stations with toilets ");
 
 
                 ToStationTv.setText(text);
@@ -200,7 +200,7 @@ public class Explore extends AppCompatActivity {
                     resultPaths.add(tempRP.get(0));
                 }
 
-                text.append(" are the nearest stations with parking ");
+                text.append(" "+((j>1)?"are":"is")+" the nearest stations with parking ");
 
                 ToStationTv.setText(text.toString());
 

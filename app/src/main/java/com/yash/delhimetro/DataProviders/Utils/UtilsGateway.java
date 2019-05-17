@@ -118,6 +118,8 @@ public class UtilsGateway {
 
             int idx = nameToIndexStation.get(name);
 
+            if(dn.getMinTimeFromSource() == Integer.MAX_VALUE)
+                break;
 
             if(count > 2)
                 break;
