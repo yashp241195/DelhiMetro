@@ -2,15 +2,10 @@ package com.yash.delhimetro;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import com.yash.delhimetro.ui.main.SectionsPagerAdapter;
 
@@ -24,6 +19,8 @@ public class ExploreRoutes extends AppCompatActivity {
 
     ArrayList<String> stationList = new ArrayList<>();
     MaterialTabHost tabHost;
+    SectionsPagerAdapter sectionsPagerAdapter;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +41,10 @@ public class ExploreRoutes extends AppCompatActivity {
         tabHost.setType(MaterialTabHost.Type.FullScreenWidth);
 
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(
+        sectionsPagerAdapter = new SectionsPagerAdapter(
                 this, getSupportFragmentManager(),stationList);
 
-        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
 
 
@@ -69,12 +66,17 @@ public class ExploreRoutes extends AppCompatActivity {
                 switch (i){
                     case 0:
                         getSupportActionBar().setTitle(R.string.tab_text_1);
+                        viewPager.setCurrentItem(0);
+
                         break;
                     case 1:
                         getSupportActionBar().setTitle(R.string.tab_text_2);
+                        viewPager.setCurrentItem(1);
                         break;
 
                 }
+
+
             }
         });
 

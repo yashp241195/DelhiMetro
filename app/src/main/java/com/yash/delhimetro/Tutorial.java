@@ -35,15 +35,22 @@ public class Tutorial extends AppCompatActivity {
 
         LinkedHashMap<String,Integer> file_maps = new LinkedHashMap<>();
 
-        file_maps.put("Select the metro network", R.mipmap.intro_3);
-        file_maps.put("Airport Express", R.mipmap.intro_4);
-        file_maps.put("Find all possible routes", R.mipmap.intro_5);
-        file_maps.put("Get the route", R.mipmap.intro_6);
-        file_maps.put("Get nearby places", R.mipmap.intro_2of6);
-        file_maps.put("Explore place on web", R.mipmap.intro_7);
-        file_maps.put("Query using web browser", R.mipmap.intro_8);
-        file_maps.put("Search all available places", R.mipmap.intro_9);
-        file_maps.put("Pinch Zoom the map", R.mipmap.intro_10);
+        file_maps.put("Welcome to DMRC", R.mipmap.intro1);
+        file_maps.put("Go Places", R.mipmap.intro2);
+        file_maps.put("Select the metro network", R.mipmap.intro3);
+        file_maps.put("Delhi metro network selected", R.mipmap.intro4);
+        file_maps.put("Explore all routes", R.mipmap.intro5);
+        file_maps.put("Selected roue stations", R.mipmap.intro6);
+        file_maps.put("Nearby Places", R.mipmap.intro7);
+        file_maps.put("Explore place on internet", R.mipmap.intro8);
+        file_maps.put("List of all places", R.mipmap.intro9);
+        file_maps.put("List of all stations", R.mipmap.intro10);
+        file_maps.put("pinch zoom map", R.mipmap.intro11);
+        file_maps.put("Query on in built web browser", R.mipmap.intro12);
+        file_maps.put("Airport Express metro network selected", R.mipmap.intro13);
+        file_maps.put("Rapid metro network selected", R.mipmap.intro14);
+        file_maps.put("Aqua metro network selected", R.mipmap.intro15);
+
 
 
         for(String name : file_maps.keySet()){
