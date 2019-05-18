@@ -30,6 +30,10 @@
             android:id="@+id/nav_webQ"
             android:icon="@drawable/ic_public_black_24dp"
             android:title="Official website" />
+        <item
+            android:id="@+id/nav_tut"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="Tutorial (App)" />
     </group>
 
     <item android:title="Communicate">

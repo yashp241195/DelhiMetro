@@ -3,14 +3,18 @@ package com.yash.delhimetro;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.SearchView;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.SearchView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,6 +23,8 @@ import com.yash.delhimetro.ViewAdapters.StationListAdapter;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class AllStations extends AppCompatActivity {
 
@@ -40,13 +46,10 @@ public class AllStations extends AppCompatActivity {
 
 
 
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
+        receiveData();
+        setUpList();
+        setupHint();
 
-                receiveData();
-                setUpList();
-            }
-        }, 50);
 
     }
 
@@ -86,6 +89,188 @@ public class AllStations extends AppCompatActivity {
 
 
     }
+
+
+    private void setupHint(){
+        ImageView imageView = (ImageView)findViewById(R.id.imageViewhint);
+
+        Bitmap bitmap  = drawHintImage();
+        imageView.setImageBitmap(bitmap);
+    }
+
+
+
+    private Bitmap drawHintImage(){
+
+        // Initialize a new Bitmap object
+        Bitmap bitmap = Bitmap.createBitmap(
+                770, // Width
+                400, // Height
+                Bitmap.Config.ARGB_8888 // Config
+        );
+
+
+        Canvas canvas = new Canvas(bitmap);
+
+        // drawing ..
+
+        LinkedHashMap<String,Integer> LineColor = new LinkedHashMap<>();
+
+
+        LineColor.put("Red", Color.RED);
+        LineColor.put("Blue",Color.parseColor("#003399"));
+        LineColor.put("Yellow",Color.parseColor("#ffcc00"));
+        LineColor.put("Green",Color.parseColor("#7CFC00"));
+        LineColor.put("Magenta",Color.parseColor("#ff66ff"));
+        LineColor.put("Pink",Color.parseColor("#ff0088"));
+        LineColor.put("Voilet",Color.parseColor("#9400D3"));
+
+        LineColor.put("Airport express (New Delhi) ",Color.parseColor("#FF6600"));
+        LineColor.put("Rapid (Gurugram)",Color.parseColor("#696969"));
+        LineColor.put("Aqua (Noida)",Color.parseColor("#00FFFF"));
+
+
+        try {
+
+            int i=2, x = 30, y = 130, radius = 12;
+            canvas.drawText("Metro",x-20,y-50,getTextPaint(Color.RED,50));
+
+            for (Map.Entry<String,Integer> entry : LineColor.entrySet()){
+
+                canvas.drawCircle(x,y,radius,getPaint(entry.getValue()));
+                canvas.drawText(entry.getKey(),x+30,y+5,getTextPaint(Color.BLACK,28));
+
+                if(i%3 == 0)
+                {x += 160; y = 70;}
+                else{  y += 50; }
+
+                i++;
+            }
+
+            x = 20;
+            y = 250;
+
+
+            String hintText = "How to Reach via Delhi Metro Main Network";
+            canvas.drawText(hintText,x,y,getTextPaint(Color.RED,33));
+
+            hintText = "Aqua: connected via Noida Sec 52 station (Blue)";
+            canvas.drawCircle(x+15,y+35,radius,getPaint(LineColor.get("Aqua (Noida)")));
+            canvas.drawText(hintText,x+35,y+45,getTextPaint(Color.BLACK,24));
+
+            hintText = "Airport: connected via New Delhi(Yellow) and Dwarka Sec 21(Blue)";
+            canvas.drawCircle(x+15,y+75,radius,getPaint(LineColor.get("Airport express (New Delhi) ")));
+            canvas.drawText(hintText,x+35,y+85,getTextPaint(Color.BLACK,24));
+
+
+            hintText = "Rapid: connected via Sikandarpur(Yellow)";
+            canvas.drawCircle(x+15,y+120,radius,getPaint(LineColor.get("Rapid (Gurugram)")));
+            canvas.drawText(hintText,x+35,y+125,getTextPaint(Color.BLACK,24));
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return bitmap;
+    }
+
+
+
+    private Paint getTextPaint(int color, int size){
+        // Initialize a new Paint instance to draw the Circle
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(color);
+        paint.setTextSize(size);
+        paint.setAntiAlias(true);
+
+        return paint;
+    }
+
+
+    private Paint getPaint(int color){
+        // Initialize a new Paint instance to draw the Circle
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(color);
+        paint.setAntiAlias(true);
+
+        return paint;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void LoadDataFromSharedPref(String Opt){
         SharedPreferences pref = getApplicationContext().

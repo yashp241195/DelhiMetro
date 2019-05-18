@@ -167,15 +167,15 @@ public class StationListAdapter extends
 
         HashMap<String,Integer> LineColor = new HashMap<>();
 
-        LineColor.put("red",Color.parseColor("#cc3300"));
+        LineColor.put("red",Color.RED);
         LineColor.put("blue",Color.parseColor("#003399"));
         LineColor.put("yellow",Color.parseColor("#ffcc00"));
         LineColor.put("green",Color.parseColor("#7CFC00"));
         LineColor.put("magenta",Color.parseColor("#ff66ff"));
         LineColor.put("pink",Color.parseColor("#ff0088"));
-        LineColor.put("voilet",Color.parseColor("#660066"));
+        LineColor.put("voilet",Color.parseColor("#9400D3"));
         LineColor.put("airport",Color.parseColor("#FF6600"));
-        LineColor.put("rapid",Color.parseColor("#20B2AA"));
+        LineColor.put("rapid",Color.parseColor("#696969"));
         LineColor.put("aqua",Color.parseColor("#00FFFF"));
 
         int x = 20;
@@ -191,7 +191,7 @@ public class StationListAdapter extends
                     LineColor.get(line):Color.TRANSPARENT;
 
             drawCircle(canvas,color,x);
-            x += 30;
+            x += 40;
 
         }
 
@@ -213,7 +213,7 @@ public class StationListAdapter extends
         // Set a pixels value to padding around the circle
         int padding = 2;
         int y = canvas.getHeight() / 2;
-        int radius = 10;
+        int radius = 14;
 
         // Finally, draw the circle on the canvas
         canvas.drawCircle(

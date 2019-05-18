@@ -681,7 +681,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_allPlace) {
             nextActivity = AllPlaces.class;
 
-        } else if (id == R.id.nav_recharge) {
+        }
+        else if (id == R.id.nav_tut) {
+            nextActivity = Tutorial.class;
+        }
+
+        else if (id == R.id.nav_recharge) {
 
             try {
 

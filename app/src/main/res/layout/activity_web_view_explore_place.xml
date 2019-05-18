@@ -33,19 +33,21 @@
             android:fontFamily="serif"
             android:text="Place Name"
             android:textColor="#130101"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/actW_placeNameTv"
             android:layout_width="0dp"
-            android:layout_height="21dp"
+            android:layout_height="20dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="serif"
             android:text="TextView"
             android:textColor="#0121CD"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/actW_placeNameLabel"
             app:layout_constraintTop_toTopOf="parent" />
@@ -60,6 +62,7 @@
             android:fontFamily="serif"
             android:text="Place Type"
             android:textColor="#0C0000"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/actW_placeNearbyMetroLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/actW_placeNameLabel" />
@@ -73,6 +76,7 @@
             android:fontFamily="serif"
             android:text="Nearby Metro Station"
             android:textColor="#140000"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -87,6 +91,7 @@
             android:fontFamily="serif"
             android:text="TextView"
             android:textColor="#FF0121CD"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/actW_placeNearbyMetroTv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.196"
@@ -103,6 +108,7 @@
             android:fontFamily="serif"
             android:text="TextView"
             android:textColor="#FF0121CD"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -114,6 +120,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="2dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
