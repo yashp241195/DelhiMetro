@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -52,7 +53,7 @@ public class SplashScreen extends AppCompatActivity {
     private SliderLayout mDemoSlider;
 
     private ArrayList<FareMetro> fareMetroArrayList = new ArrayList<>();
-
+    private LinkedHashMap<String,Integer> file_maps = new LinkedHashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +90,6 @@ public class SplashScreen extends AppCompatActivity {
     private void setUpSlider(){
 
         mDemoSlider = (SliderLayout)findViewById(R.id.slider);
-
-        LinkedHashMap<String,Integer> file_maps = new LinkedHashMap<>();
-
 
         file_maps.put("Welcome to DMRC", R.mipmap.intro1);
         file_maps.put("Go Places", R.mipmap.intro2);
@@ -496,10 +494,11 @@ public class SplashScreen extends AppCompatActivity {
         private long t1,t2;
 
         private TextView textView;
+        private ImageView imageView;
 
         private static final String LOAD_COMPLETE = "Loading Complete";
-        private static final String LOAD_FIRST_TIME = "Please wait .. " +
-                "\ninitializing resources for the first time";
+        private static final String LOAD_FIRST_TIME = "Please Wait !!! " +
+                "loading resources for the first time will take few seconds ..";
 
 
         @Override
@@ -509,7 +508,10 @@ public class SplashScreen extends AppCompatActivity {
             this.textView = (TextView)findViewById(R.id.tv2);
 
             if(isUnLoaded("AllDetailsLoaded")) {
+
                 this.textView.setText(LOAD_FIRST_TIME);
+                this.imageView = (ImageView)findViewById(R.id.upperLogo);
+                this.imageView.setVisibility(View.GONE);
             }
 
             t1 = System.currentTimeMillis();
