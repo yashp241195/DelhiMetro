@@ -55,6 +55,12 @@ public class RouteSummaryListAdapter extends RecyclerView.Adapter<RouteSummaryLi
                 return lhs.getSwitchCount().compareTo(rhs.getSwitchCount());
             }
         });
+
+        // set max path limit as 5
+
+        if(resultPathsArrayList.size()>5)
+        resultPathsArrayList = new ArrayList<>(resultPathsArrayList.subList(0,5));
+
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
