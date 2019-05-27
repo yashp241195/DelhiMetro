@@ -15,4 +15,11 @@
     <string name="tab_text_2">Nearby Places</string>
     <string name="title_activity_explore_routes">ExploreRoutes</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_tutorial">Tutorial</string>
+    <string name="title_activity_web_query">WebQuery</string>
+    <string name="title_activity_all_places">AllPlaces</string>
+    <string name="title_activity_all_stations">AllStations</string>
+    <string name="title_activity_find_routes">Routes</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_activity_explore_place">ExplorePlace</string>
 </resources>
